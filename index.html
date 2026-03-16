@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>副業手取り・税金・確定申告シミュレーター | 作業量も3秒で逆算</title>
 <meta name="description" content="副業の手取り額、引かれる税金（所得税・住民税）、確定申告の有無が入力するだけでリアルタイムにわかる無料シミュレーター。目標収入から必要な作業量も逆算できます。">
-<meta name="keywords" content="副業,手取り,税金,確定申告,シミュレーター,計算,住民税,所得税,バレない">
+<meta name="keywords" content="副業 税金,副業 手取り 計算,副業 確定申告 シミュレーター">
 <link rel="canonical" href="https://fukugyo-sim.com/">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="副業手取り・税金・確定申告シミュレーター">
@@ -73,7 +73,7 @@ body.modal-open{overflow:hidden}
       <div>
         <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">本業の年収</label>
         <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-blue-400">
-          <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" id="salary" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="400">
+          <input type="number" inputmode="numeric" min="0" id="salary" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="400">
           <span class="px-4 text-gray-500 dark:text-gray-400 font-bold">万円</span>
         </div>
       </div>
@@ -81,14 +81,14 @@ body.modal-open{overflow:hidden}
         <div>
           <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">副業の売上</label>
           <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-blue-400">
-            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" id="sideRevenue" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="50">
+            <input type="number" inputmode="numeric" min="0" id="sideRevenue" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="50">
             <span class="px-3 text-gray-500 dark:text-gray-400 font-bold">万円</span>
           </div>
         </div>
         <div>
           <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">副業の経費</label>
           <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-blue-400">
-            <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" id="sideExpense" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10">
+            <input type="number" inputmode="numeric" min="0" id="sideExpense" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10">
             <span class="px-3 text-gray-500 dark:text-gray-400 font-bold">万円</span>
           </div>
         </div>
@@ -134,7 +134,7 @@ body.modal-open{overflow:hidden}
         <div class="flex justify-between items-center">
           <div>
             <span class="font-bold text-gray-800 dark:text-gray-200">住民税 <span class="text-xs text-blue-500 bg-blue-50 dark:bg-blue-900/30 px-1 rounded ml-1">税率 10%</span></span>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">※均等割は本業で支払い済みと仮定。自治体により若干異なります。</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">※均等割は本業で支払い済みと仮定。自治体により異なります。</p>
           </div>
           <div class="font-bold text-lg dark:text-white" id="resResidentTax">0円</div>
         </div>
@@ -175,7 +175,7 @@ body.modal-open{overflow:hidden}
       <div>
         <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">1週間の作業時間</label>
         <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-indigo-400">
-          <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" id="workHours" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10">
+          <input type="number" inputmode="numeric" min="0" id="workHours" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10">
           <span class="px-4 text-gray-500 dark:text-gray-400 font-bold">時間</span>
         </div>
       </div>
@@ -201,7 +201,7 @@ body.modal-open{overflow:hidden}
     <div class="mt-4">
       <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">目標の手取り（年間）</label>
       <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-green-400">
-        <input type="number" inputmode="numeric" pattern="[0-9]*" min="0" id="targetTakeHome" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10">
+        <input type="number" inputmode="numeric" min="0" id="targetTakeHome" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10">
         <span class="px-4 text-gray-500 dark:text-gray-400 font-bold">万円</span>
       </div>
     </div>
@@ -323,21 +323,14 @@ body.modal-open{overflow:hidden}
       </details>
     </div>
   </section>
-
-  <section class="bg-blue-50 dark:bg-blue-900/30 rounded-2xl shadow-sm border border-blue-200 dark:border-blue-800 p-6 text-center">
-    <h2 class="text-lg font-bold text-blue-800 dark:text-blue-300 mb-2">💡 ご意見・ご要望をお聞かせください</h2>
-    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">「こんな機能が欲しい」「ここが使いにくい」など、開発者へ直接メッセージを送れます。</p>
-    <a aria-label="開発者にDMを送る" href="https://x.com/messages/compose?recipient_id=2032694737069838336" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-black dark:bg-white text-white dark:text-black font-bold py-3 px-6 rounded-full shadow-md hover:opacity-80 transition transform active:scale-95">
-      <svg class="w-5 h-5 mr-2 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 3.827H5.078z"/></svg>
-      開発者（@AppLab_K）にDMを送る
-    </a>
-  </section>
 </main>
 
 <footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 border-t dark:border-gray-800">
-  <div class="flex justify-center space-x-4 mb-4 text-sm">
-    <button onclick="openModal('termsModal')" class="hover:underline hover:text-blue-500">利用規約</button>
-    <button onclick="openModal('privacyModal')" class="hover:underline hover:text-blue-500">プライバシーポリシー</button>
+  <div class="flex flex-wrap justify-center gap-4 mb-4 text-sm">
+    <button aria-label="利用規約を開く" onclick="openModal('termsModal')" class="hover:underline hover:text-blue-500">利用規約</button>
+    <button aria-label="プライバシーポリシーを開く" onclick="openModal('privacyModal')" class="hover:underline hover:text-blue-500">プライバシーポリシー</button>
+    <button aria-label="運営者情報を開く" onclick="openModal('operatorModal')" class="hover:underline hover:text-blue-500">運営者情報</button>
+    <a aria-label="お問い合わせ" href="https://x.com/messages/compose?recipient_id=2032694737069838336" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-blue-500">お問い合わせ</a>
   </div>
   <p class="text-sm font-bold">© 2026 副業手取りシミュレーター by AppLab_K</p>
   <p class="text-xs mt-3 text-red-500 dark:text-red-400 font-bold">※本サイトは税理士監修ではありません。計算結果はあくまで参考値としてご利用ください。</p>
@@ -378,6 +371,23 @@ body.modal-open{overflow:hidden}
   </div>
 </div>
 
+<div id="operatorModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-lg w-full max-h-[80vh] flex flex-col">
+    <div class="p-5 border-b dark:border-gray-700 flex justify-between items-center">
+      <h3 class="text-lg font-bold dark:text-white">運営者情報</h3>
+      <button aria-label="閉じる" onclick="closeModal('operatorModal')" class="text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl leading-none">&times;</button>
+    </div>
+    <div class="p-5 overflow-y-auto text-sm text-gray-600 dark:text-gray-300 space-y-4">
+      <p><strong>運営者:</strong> AppLab_K</p>
+      <p><strong>目的:</strong> 副業を始める方の税金や手取りに関する不安を解消し、適切な目標設定をサポートするための無料ツールを提供しています。</p>
+      <p><strong>お問い合わせ:</strong> X（旧Twitter）のDMにて受け付けております。</p>
+    </div>
+    <div class="p-4 border-t dark:border-gray-700 text-center">
+      <button onclick="closeModal('operatorModal')" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">閉じる</button>
+    </div>
+  </div>
+</div>
+
 <script>
 function openModal(id){document.getElementById(id).classList.remove('hidden');document.body.classList.add('modal-open');}
 function closeModal(id){document.getElementById(id).classList.add('hidden');document.body.classList.remove('modal-open');}
@@ -407,11 +417,8 @@ function calculateTax(salary, sideRevenue, sideExpense, hasDependent) {
 
   let salaryIncome = Math.max(0, salary - salaryDeduction);
   
-  // 社会保険料の上限考慮 (厚生年金上限約780万, 健保上限約1668万)
-  let socialInsurance = 0;
-  socialInsurance += Math.min(salary, 7800000) * 0.0915;
-  socialInsurance += Math.min(salary, 16680000) * 0.05;
-  socialInsurance += salary * 0.006;
+  // 社会保険料（約15%だが上限あり。参考値として算出）
+  let socialInsurance = Math.min(salary * 0.15, 1200000);
 
   let totalDeduction = 480000 + socialInsurance + (hasDependent ? 380000 : 0);
   let taxableIncomeBase = Math.max(0, salaryIncome - totalDeduction);
@@ -431,23 +438,41 @@ function calculateTax(salary, sideRevenue, sideExpense, hasDependent) {
   };
 }
 
-function updateShareUrl(s, r, e) {
+function saveToLocal() {
+  localStorage.setItem('salary', getNum('salary'));
+  localStorage.setItem('sideRevenue', getNum('sideRevenue'));
+  localStorage.setItem('sideExpense', getNum('sideExpense'));
+  localStorage.setItem('hasDependent', document.getElementById('hasDependent').value);
+  localStorage.setItem('jobType', getNum('jobType'));
+  localStorage.setItem('workHours', getNum('workHours'));
+  localStorage.setItem('targetTakeHome', getNum('targetTakeHome'));
+}
+
+function loadFromLocalOrUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const setVal = (id, key, def) => {
+    const val = params.get(key) ?? localStorage.getItem(key) ?? def;
+    if(val !== null) document.getElementById(id).value = val;
+  };
+  setVal('salary', 'salary', '400');
+  setVal('sideRevenue', 'sideRevenue', '50');
+  setVal('sideExpense', 'sideExpense', '10');
+  setVal('hasDependent', 'hasDependent', 'false');
+  setVal('jobType', 'jobType', '1500');
+  setVal('workHours', 'workHours', '10');
+  setVal('targetTakeHome', 'targetTakeHome', '10');
+}
+
+function updateShareUrl() {
   const url = new URL(window.location.href);
-  url.searchParams.set('s', s); url.searchParams.set('r', r); url.searchParams.set('e', e);
+  url.searchParams.set('salary', getNum('salary'));
+  url.searchParams.set('sideRevenue', getNum('sideRevenue'));
+  url.searchParams.set('sideExpense', getNum('sideExpense'));
   window.history.replaceState(null, '', url.href);
   const text = encodeURIComponent('副業の手取りと税金が3秒でわかるシミュレーター！');
   const shareUrl = encodeURIComponent(url.href);
   document.getElementById('shareX').href = `https://x.com/intent/tweet?text=${text}&url=${shareUrl}`;
   document.getElementById('shareLine').href = `https://line.me/R/msg/text/?${text}%0D%0A${shareUrl}`;
-}
-
-function saveToLocal() {
-  const data = {
-    s: getNum('salary'), r: getNum('sideRevenue'), e: getNum('sideExpense'),
-    d: document.getElementById('hasDependent').value, t: getNum('jobType'),
-    w: getNum('workHours'), th: getNum('targetTakeHome')
-  };
-  localStorage.setItem('fukugyoData', JSON.stringify(data));
 }
 
 function runAllSimulations() {
@@ -487,12 +512,17 @@ function runAllSimulations() {
   document.getElementById('workVideo').innerText = formatNumber(reqRev / 5000);
   document.getElementById('workWriter').innerText = formatNumber(reqRev / 3000);
   document.getElementById('workDelivery').innerText = formatNumber(reqRev / 1500);
-
-  saveToLocal(); updateShareUrl(s, r, e);
 }
 
 let timeoutId;
-function debouncedRun() { clearTimeout(timeoutId); timeoutId = setTimeout(runAllSimulations, 300); }
+function debouncedRun() {
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(() => {
+    runAllSimulations();
+    saveToLocal();
+    updateShareUrl();
+  }, 300);
+}
 
 function calcBareRisk() {
   let count = 0;
@@ -575,22 +605,11 @@ function nextQuiz() {
 }
 
 window.onload = () => {
-  const params = new URLSearchParams(window.location.search);
-  const localData = JSON.parse(localStorage.getItem('fukugyoData') || '{}');
-  const setVal = (id, key, def) => {
-    const val = params.get(key) ?? localData[key] ?? def;
-    if(val !== null) document.getElementById(id).value = val;
-  };
-  setVal('salary', 's', '400'); setVal('sideRevenue', 'r', '50'); setVal('sideExpense', 'e', '10');
-  setVal('hasDependent', 'd', 'false'); setVal('jobType', 't', '1500'); setVal('workHours', 'w', '10'); setVal('targetTakeHome', 'th', '10');
-  
-  const scrollPos = localStorage.getItem('scrollPos');
-  if(scrollPos) setTimeout(() => window.scrollTo(0, parseInt(scrollPos)), 100);
-  
-  runAllSimulations(); initQuiz();
+  loadFromLocalOrUrl();
+  runAllSimulations();
+  updateShareUrl();
+  initQuiz();
 };
-
-window.addEventListener('beforeunload', () => localStorage.setItem('scrollPos', window.scrollY));
 </script>
 </body>
 </html>
