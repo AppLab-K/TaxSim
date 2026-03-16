@@ -6,25 +6,49 @@
 <title>副業手取り・税金・確定申告シミュレーター | 作業量も3秒で逆算</title>
 <meta name="description" content="副業の手取り額、引かれる税金（所得税・住民税）、確定申告の有無が入力するだけでリアルタイムにわかる無料シミュレーター。目標収入から必要な作業量も逆算できます。">
 <meta name="keywords" content="副業 税金,副業 手取り 計算,副業 確定申告 シミュレーター">
-<link rel="canonical" href="https://fukugyo-sim.com/">
+<link rel="canonical" href="https://taxsim.applab-k0314.workers.dev/">
 <meta name="robots" content="index, follow">
-<meta property="og:title" content="副業手取り・税金・確定申告シミュレーター">
-<meta property="og:description" content="副業の手取り額、引かれる税金、確定申告の有無が入力するだけでリアルタイムにわかる無料シミュレーター。">
+
+<!-- OGP -->
+<meta property="og:title" content="副業手取り・税金シミュレーター">
+<meta property="og:description" content="副業の手取り額と税金（所得税・住民税）をリアルタイムで計算できる無料ツール">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://fukugyo-sim.com/">
-<meta property="og:image" content="https://fukugyo-sim.com/ogp-image.jpg">
+<meta property="og:url" content="https://taxsim.applab-k0314.workers.dev/">
+<meta property="og:image" content="https://applab-k.github.io/TaxSim/unnamed.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+
+<!-- X (旧Twitter) -->
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="副業手取り・税金シミュレーター">
+<meta name="twitter:description" content="副業の手取り額と税金をリアルタイムで計算できる無料ツール">
+<meta name="twitter:image" content="https://applab-k.github.io/TaxSim/unnamed.jpg">
+
+<!-- 構造化データ (JSON-LD) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph":[
-    { "@type": "WebSite", "name": "副業手取りシミュレーター", "url": "https://fukugyo-sim.com/" },
+    { 
+      "@type": "WebSite", 
+      "name": "副業手取りシミュレーター", 
+      "url": "https://taxsim.applab-k0314.workers.dev/" 
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement":[
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ホーム",
+          "item": "https://taxsim.applab-k0314.workers.dev/"
+        }
+      ]
+    },
     {
       "@type": "WebApplication",
       "name": "副業手取りシミュレーター",
-      "url": "https://fukugyo-sim.com/",
+      "url": "https://taxsim.applab-k0314.workers.dev/",
       "description": "副業の手取り額、引かれる税金、確定申告の有無を計算する無料ツール。",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "All"
@@ -33,14 +57,18 @@
       "@type": "FAQPage",
       "mainEntity":[
         { "@type": "Question", "name": "副業が会社にバレない方法はありますか？", "acceptedAnswer": { "@type": "Answer", "text": "確定申告の際に、住民税の徴収方法を「自分で納付（普通徴収）」にチェックすることで、会社に副業分の住民税通知がいかなくなり、税金経由でバレるのを防げます。" } },
-        { "@type": "Question", "name": "売上が20万円以下なら税金は一切かからない？", "acceptedAnswer": { "@type": "Answer", "text": "国の税金である「所得税」の確定申告は不要ですが、お住まいの市区町村へ「住民税の申告」は必要になる場合があります。住民税は少額でもかかることがあります。" } }
+        { "@type": "Question", "name": "売上が20万円以下なら税金は一切かからない？", "acceptedAnswer": { "@type": "Answer", "text": "国の税金である「所得税」の確定申告は不要ですが、お住まいの市区町村へ「住民税の申告」は必要になる場合があります。住民税は少額でもかかることがあります。" } },
+        { "@type": "Question", "name": "経費にはどんなものが含まれますか？", "acceptedAnswer": { "@type": "Answer", "text": "副業のために直接使ったお金です。例えば、仕事用のパソコン代、インターネット代の一部、打ち合わせのカフェ代、勉強用の書籍代などが該当します。" } }
       ]
     }
   ]
 }
 </script>
+
+<!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com" defer></script>
 <script>tailwind.config={darkMode:'media'}</script>
+
 <style>
 @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
 details>summary{list-style:none}details>summary::-webkit-details-marker{display:none}
@@ -52,7 +80,7 @@ body.modal-open{overflow:hidden}
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans pb-20 transition-colors duration-300">
 
 <header class="bg-blue-600 dark:bg-blue-800 text-white p-5 text-center shadow-md sticky top-0 z-10">
-  <h1 class="text-2xl font-bold tracking-wider">副業手取りシミュレーター</h1>
+  <h1 class="text-2xl font-bold tracking-wider">副業手取り・税金・確定申告シミュレーター</h1>
   <p class="text-sm mt-1 opacity-90">手取り・税金・作業量がリアルタイムでわかる！</p>
 </header>
 
@@ -144,7 +172,7 @@ body.modal-open{overflow:hidden}
         <div class="text-sm text-gray-500 dark:text-gray-400 font-bold mb-1">確定申告</div>
         <div class="text-2xl font-black" id="resTaxReturn">必要</div>
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 bg-gray-50 dark:bg-gray-700 inline-block px-3 py-1 rounded-full" id="resTaxReturnReason"></p>
-        <p class="text-[10px] text-gray-400 mt-1">※副業所得20万円以下で申告不要になるのは年末調整済みの給与所得者のみです。</p>
+        <p class="text-[10px] text-gray-400 mt-1">※副業所得20万円以下で申告不要になるのは、年末調整済みの給与所得者（会社員など）のみです。</p>
       </div>
 
       <div class="mt-6 flex justify-center space-x-4">
@@ -333,7 +361,7 @@ body.modal-open{overflow:hidden}
     <a aria-label="お問い合わせ" href="https://x.com/messages/compose?recipient_id=2032694737069838336" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-blue-500">お問い合わせ</a>
   </div>
   <p class="text-sm font-bold">© 2026 副業手取りシミュレーター by AppLab_K</p>
-  <p class="text-xs mt-3 text-red-500 dark:text-red-400 font-bold">※本サイトは税理士監修ではありません。計算結果はあくまで参考値としてご利用ください。</p>
+  <p class="text-xs mt-3 text-red-500 dark:text-red-400 font-bold">※ 本サイトは税理士監修ではありません。社会保険料（上限ありの15%で概算）や税金はあくまで参考値としてご利用ください。</p>
 </footer>
 
 <button aria-label="結果へスクロール" onclick="document.getElementById('resultArea').scrollIntoView({behavior: 'smooth'})" class="fixed bottom-6 right-6 bg-blue-600 text-white w-14 h-14 rounded-full shadow-2xl hover:bg-blue-700 transition-transform transform hover:scale-110 z-50 flex flex-col items-center justify-center border-2 border-white dark:border-gray-800">
@@ -389,8 +417,18 @@ body.modal-open{overflow:hidden}
 </div>
 
 <script>
+// モーダル制御
 function openModal(id){document.getElementById(id).classList.remove('hidden');document.body.classList.add('modal-open');}
 function closeModal(id){document.getElementById(id).classList.add('hidden');document.body.classList.remove('modal-open');}
+
+// ESCキーでモーダルを閉じる
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape"){
+    document.querySelectorAll("[id$='Modal']").forEach(m => m.classList.add("hidden"));
+    document.body.classList.remove("modal-open");
+  }
+});
+
 const formatCurrency = n => new Intl.NumberFormat('ja-JP').format(Math.round(n)) + '円';
 const formatNumber = n => new Intl.NumberFormat('ja-JP').format(Math.round(n));
 const getNum = id => { const v = parseFloat(document.getElementById(id).value); return (isNaN(v) || v < 0) ? 0 : v; };
@@ -417,7 +455,7 @@ function calculateTax(salary, sideRevenue, sideExpense, hasDependent) {
 
   let salaryIncome = Math.max(0, salary - salaryDeduction);
   
-  // 社会保険料（約15%だが上限あり。参考値として算出）
+  // 社会保険料（約15%だが上限あり。あくまで参考値として算出）
   let socialInsurance = Math.min(salary * 0.15, 1200000);
 
   let totalDeduction = 480000 + socialInsurance + (hasDependent ? 380000 : 0);
@@ -427,7 +465,9 @@ function calculateTax(salary, sideRevenue, sideExpense, hasDependent) {
   let baseInfo = getIncomeTaxInfo(taxableIncomeBase);
   let totalInfo = getIncomeTaxInfo(taxableIncomeBase + sideIncome);
   
+  // 復興特別所得税2.1%加算
   let sideIncomeTax = Math.max(0, totalInfo.tax - baseInfo.tax) * 1.021;
+  // 所得割10% (均等割は本業で支払い済みと仮定)
   let sideResidentTax = sideIncome * 0.10; 
   let totalSideTax = sideIncomeTax + sideResidentTax;
   
@@ -464,15 +504,41 @@ function loadFromLocalOrUrl() {
 }
 
 function updateShareUrl() {
-  const url = new URL(window.location.href);
+  // ローカル環境(file://)で開いている場合は本番URLをベースにする
+  let baseUrl = window.location.href;
+  if (baseUrl.startsWith('file://')) {
+    baseUrl = 'https://taxsim.applab-k0314.workers.dev/';
+  }
+  
+  const url = new URL(baseUrl);
   url.searchParams.set('salary', getNum('salary'));
   url.searchParams.set('sideRevenue', getNum('sideRevenue'));
   url.searchParams.set('sideExpense', getNum('sideExpense'));
-  window.history.replaceState(null, '', url.href);
-  const text = encodeURIComponent('副業の手取りと税金が3秒でわかるシミュレーター！');
+  url.searchParams.set('hasDependent', document.getElementById('hasDependent').value);
+  url.searchParams.set('jobType', getNum('jobType'));
+  url.searchParams.set('workHours', getNum('workHours'));
+  url.searchParams.set('targetTakeHome', getNum('targetTakeHome'));
+  
+  // file:// 環境では replaceState がエラーになることがあるため回避
+  if (!window.location.href.startsWith('file://')) {
+    window.history.replaceState(null, '', url.href);
+  }
+  
+  const text = encodeURIComponent('副業の手取り・税金・確定申告が3秒でわかる無料シミュレーター');
   const shareUrl = encodeURIComponent(url.href);
+  
+  // X (Twitter) のシェアリンク
   document.getElementById('shareX').href = `https://x.com/intent/tweet?text=${text}&url=${shareUrl}`;
-  document.getElementById('shareLine').href = `https://line.me/R/msg/text/?${text}%0D%0A${shareUrl}`;
+  
+  // LINE のシェアリンク（スマホとPCで最適な画面に自動分岐）
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (isMobile) {
+    // スマホ：LINEアプリが起動し、必ず「送信先を選択する画面」が開く
+    document.getElementById('shareLine').href = `https://line.me/R/share?text=${text}%0D%0A${shareUrl}`;
+  } else {
+    // PC：ブラウザ上でLINEのシェア画面が開き、エラーを防ぐ
+    document.getElementById('shareLine').href = `https://social-plugins.line.me/lineit/share?url=${shareUrl}`;
+  }
 }
 
 function runAllSimulations() {
@@ -541,7 +607,7 @@ function calcBareRisk() {
   }
 }
 
-const quizData = [
+const quizData =[
   { q: "副業はいくらから確定申告が必要？", choices:["10万円以上", "20万円以上", "50万円以上"], answer: 1, explanation: "副業所得（売上 - 経費）が20万円以上になると、確定申告が必要になります。" },
   { q: "確定申告の期間は原則いつ？", choices:["1月1日〜1月31日", "2月16日〜3月15日", "3月1日〜4月15日"], answer: 1, explanation: "原則として、翌年の2月16日から3月15日までに申告と納税を行います。" },
   { q: "経費にできないものはどれ？", choices:["仕事用のPC代", "仕事の打ち合わせカフェ代", "プライベートの食事代"], answer: 2, explanation: "経費にできるのは「事業（副業）を行うために直接必要な支出」のみです。" },
