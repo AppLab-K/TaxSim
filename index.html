@@ -1,684 +1,765 @@
 <!DOCTYPE html>
 <html lang="ja" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>副業手取り・税金・確定申告シミュレーター | 作業量も3秒で逆算</title>
-<meta name="description" content="副業の手取り額、引かれる税金（所得税・住民税）、確定申告の有無が入力するだけでリアルタイムにわかる無料シミュレーター。目標収入から必要な作業量も逆算できます。">
-<meta name="keywords" content="副業 税金,副業 手取り 計算,副業 確定申告 シミュレーター">
-<link rel="canonical" href="https://taxsim.applab-k0314.workers.dev/">
-<meta name="robots" content="index, follow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>副業手取りシミュレーター | 税金・確定申告・作業量が3秒でわかる</title>
+  <meta name="description" content="副業の手取り額、引かれる税金（所得税・住民税）、確定申告の有無が入力するだけでリアルタイムにわかる無料シミュレーター。目標収入から必要な作業量も逆算できます。">
+  <link rel="canonical" href="https://taxsim.applab-k0314.workers.dev/">
+  <meta name="robots" content="index, follow">
+  
+  <!-- OGP -->
+  <meta property="og:title" content="副業手取り・税金シミュレーター">
+  <meta property="og:description" content="副業の手取り額と税金（所得税・住民税）をリアルタイムで計算できる無料ツール">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://taxsim.applab-k0314.workers.dev/">
+  <meta property="og:image" content="https://applab-k.github.io/TaxSim/ogp.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  
+  <!-- X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="副業手取り・税金シミュレーター">
+  <meta name="twitter:description" content="副業の手取り額と税金をリアルタイムで計算できる無料ツール">
+  <meta name="twitter:image" content="https://applab-k.github.io/TaxSim/ogp.jpg">
 
-<!-- OGP -->
-<meta property="og:title" content="副業手取り・税金シミュレーター">
-<meta property="og:description" content="副業の手取り額と税金（所得税・住民税）をリアルタイムで計算できる無料ツール">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://taxsim.applab-k0314.workers.dev/">
-<meta property="og:image" content="https://applab-k.github.io/TaxSim/ogp.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-
-<!-- X (旧Twitter) -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="副業手取り・税金シミュレーター">
-<meta name="twitter:description" content="副業の手取り額と税金をリアルタイムで計算できる無料ツール">
-<meta name="twitter:image" content="https://applab-k.github.io/TaxSim/ogp.jpg">
-
-<!-- 構造化データ (JSON-LD) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph":[
-    { 
-      "@type": "WebSite", 
-      "name": "副業手取りシミュレーター", 
-      "url": "https://taxsim.applab-k0314.workers.dev/" 
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement":[
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "ホーム",
-          "item": "https://taxsim.applab-k0314.workers.dev/"
-        }
-      ]
-    },
-    {
-      "@type": "WebApplication",
-      "name": "副業手取りシミュレーター",
-      "url": "https://taxsim.applab-k0314.workers.dev/",
-      "description": "副業の手取り額、引かれる税金、確定申告の有無を計算する無料ツール。",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "All"
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity":[
-        { "@type": "Question", "name": "副業が会社にバレない方法はありますか？", "acceptedAnswer": { "@type": "Answer", "text": "確定申告の際に、住民税の徴収方法を「自分で納付（普通徴収）」にチェックすることで、会社に副業分の住民税通知がいかなくなり、税金経由でバレるのを防げます。" } },
-        { "@type": "Question", "name": "売上が20万円以下なら税金は一切かからない？", "acceptedAnswer": { "@type": "Answer", "text": "国の税金である「所得税」の確定申告は不要ですが、お住まいの市区町村へ「住民税の申告」は必要になる場合があります。住民税は少額でもかかることがあります。" } },
-        { "@type": "Question", "name": "経費にはどんなものが含まれますか？", "acceptedAnswer": { "@type": "Answer", "text": "副業のために直接使ったお金です。例えば、仕事用のパソコン代、インターネット代の一部、打ち合わせのカフェ代、勉強用の書籍代などが該当します。" } }
-      ]
-    }
-  ]
-}
-</script>
-
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com" defer></script>
-<script>tailwind.config={darkMode:'media'}</script>
-
-<style>
-@media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
-details>summary{list-style:none}details>summary::-webkit-details-marker{display:none}
-input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-input[type="number"]{-moz-appearance:textfield}
-body.modal-open{overflow:hidden}
-</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph":[
+      {
+        "@type": "WebApplication",
+        "name": "副業手取りシミュレーター",
+        "url": "https://taxsim.applab-k0314.workers.dev/",
+        "description": "副業の手取り額、引かれる税金、確定申告の有無を計算する無料ツール。",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity":[
+          { "@type": "Question", "name": "副業が会社にバレない方法はありますか？", "acceptedAnswer": { "@type": "Answer", "text": "確定申告の際に、住民税の徴収方法を「自分で納付（普通徴収）」にチェックすることで、会社に副業分の住民税通知がいかなくなり、税金経由でバレるのを防げます。" } },
+          { "@type": "Question", "name": "売上が20万円以下なら税金は一切かからない？", "acceptedAnswer": { "@type": "Answer", "text": "国の税金である「所得税」の確定申告は不要ですが、お住まいの市区町村へ「住民税の申告」は必要になる場合があります。住民税は少額でもかかることがあります。" } },
+          { "@type": "Question", "name": "経費にはどんなものが含まれますか？", "acceptedAnswer": { "@type": "Answer", "text": "副業のために直接使ったお金です。例えば、仕事用のパソコン代、インターネット代の一部、打ち合わせのカフェ代、勉強用の書籍代などが該当します。" } },
+          { "@type": "Question", "name": "アルバイト（パート）の副業でもこの計算で合っていますか？", "acceptedAnswer": { "@type": "Answer", "text": "アルバイトは「給与所得」となるため、このシミュレーター（事業所得・雑所得を想定）とは税金の計算方法が異なります。アルバイトの場合は、本業と副業の給与を合算して計算されます。" } },
+          { "@type": "Question", "name": "青色申告と白色申告の違いは何ですか？", "acceptedAnswer": { "@type": "Answer", "text": "青色申告は事前の申請と複式簿記での記帳が必要ですが、最大65万円の特別控除が受けられ税金が安くなります。白色申告は手続きが簡単ですが、特別控除はありません。" } }
+        ]
+      }
+    ]
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'media' }</script>
+  <style>
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type="number"] { -moz-appearance: textfield; }
+    body.modal-open { overflow: hidden; }
+  </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans pb-20 transition-colors duration-300">
 
-<header class="bg-blue-600 dark:bg-blue-800 text-white p-5 text-center shadow-md sticky top-0 z-10">
-  <h1 class="text-2xl font-bold tracking-wider">副業手取り・税金・確定申告シミュレーター</h1>
-  <p class="text-sm mt-1 opacity-90">手取り・税金・作業量がリアルタイムでわかる！</p>
-</header>
+  <header class="bg-blue-600 dark:bg-blue-800 text-white p-5 text-center shadow-md sticky top-0 z-10">
+    <h1 class="text-2xl font-bold tracking-wider">副業手取りシミュレーター</h1>
+    <p class="text-sm mt-1 opacity-90">手取り・税金・作業量がリアルタイムでわかる！</p>
+  </header>
 
-<div class="max-w-2xl mx-auto px-4 mt-4">
-  <div class="bg-gray-200 dark:bg-gray-800 text-gray-400 text-xs text-center py-6 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
-    スポンサーリンク<br>(ここにAdSenseコードを配置)
-  </div>
-</div>
-
-<main class="max-w-2xl mx-auto p-4 space-y-8 mt-4">
-  <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-    <h2 class="text-xl font-bold mb-4 border-b-2 border-blue-100 dark:border-blue-900 pb-2 flex items-center"><span class="text-2xl mr-2">🧮</span> 手取り・税金計算</h2>
-    <div class="mb-5 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-3 flex items-start">
-      <span class="text-green-600 dark:text-green-400 mr-2 text-lg leading-none">🔒</span>
-      <p class="text-xs text-green-700 dark:text-green-300 font-bold leading-relaxed">入力データはサーバーに送信されず、端末内でのみ安全に計算されます。</p>
+  <!-- 💰 AdSense対策 ① ヘッダー下 -->
+  <div class="max-w-2xl mx-auto px-4 mt-4">
+    <div class="bg-gray-200 dark:bg-gray-800 text-gray-400 text-xs text-center py-6 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
+      スポンサーリンク<br>(ここにAdSenseコードを配置)
     </div>
-    <div class="space-y-5">
+  </div>
+
+  <main class="max-w-2xl mx-auto p-4 space-y-8 mt-4">
+    <!-- ① 副業手取りシミュレーター -->
+    <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <h2 class="text-xl font-bold mb-4 border-b-2 border-blue-100 dark:border-blue-900 pb-2 flex items-center">
+        <span class="text-2xl mr-2">🧮</span> 手取り・税金計算
+      </h2>
+      <div class="mb-5 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg p-3 flex items-start">
+        <span class="text-green-600 dark:text-green-400 mr-2 text-lg leading-none">🔒</span>
+        <p class="text-xs text-green-700 dark:text-green-300 font-bold leading-relaxed">入力されたデータはサーバーに送信されず、お使いの端末内でのみ安全に計算されます。</p>
+      </div>
+      <div class="space-y-5">
+        <div>
+          <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">本業の年収</label>
+          <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-blue-400">
+            <input type="number" min="0" id="salary" oninput="runAllSimulations()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="400" step="10">
+            <span class="px-4 text-gray-500 dark:text-gray-400 font-bold">万円</span>
+          </div>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 bg-gray-50 dark:bg-gray-700 p-2 rounded border border-gray-200 dark:border-gray-600">
+            💡 <strong>なぜ本業の年収が必要？</strong><br>日本の税金は「累進課税」といい、本業の年収が高いほど副業にかかる税率も上がります。正確な税金を計算するために必要です。
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">副業の売上</label>
+            <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-blue-400">
+              <input type="number" min="0" id="sideRevenue" oninput="runSimulation()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="50" step="1">
+              <span class="px-3 text-gray-500 dark:text-gray-400 font-bold">万円</span>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">副業の経費</label>
+            <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-blue-400">
+              <input type="number" min="0" id="sideExpense" oninput="runSimulation()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10" step="1">
+              <span class="px-3 text-gray-500 dark:text-gray-400 font-bold">万円</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">扶養家族</label>
+          <select id="hasDependent" onchange="runAllSimulations()" class="p-3 w-full border dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 dark:text-white outline-none focus:ring-2 ring-blue-400">
+            <option value="false">なし</option>
+            <option value="true">あり</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="resultArea" class="mt-6 bg-blue-50 dark:bg-blue-900/20 p-5 rounded-xl border border-blue-200 dark:border-blue-800 transition-colors scroll-mt-24">
+        <div class="text-center mb-4">
+          <span class="text-sm text-gray-600 dark:text-gray-400 font-bold">副業所得 (売上 - 経費) = </span>
+          <span class="text-xl font-black text-gray-800 dark:text-gray-100" id="resSideIncome">0円</span>
+        </div>
+        <div class="grid grid-cols-2 gap-4 text-center mb-5">
+          <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+            <div class="text-sm text-gray-500 dark:text-gray-400 font-bold mb-1">副業の手取り</div>
+            <div class="text-2xl font-black text-blue-600 dark:text-blue-400" id="resTakeHome">0円</div>
+          </div>
+          <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+            <div class="text-sm text-gray-500 dark:text-gray-400 font-bold mb-1">引かれる税金</div>
+            <div class="text-2xl font-black text-red-500 dark:text-red-400" id="resTotalTax">0円</div>
+          </div>
+        </div>
+
+        <!-- 💰 AdSense対策 ② 手取り結果の下 -->
+        <div class="mb-5 bg-gray-200 dark:bg-gray-800 text-gray-400 text-xs text-center py-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
+          スポンサーリンク<br>(ここにAdSenseコードを配置)
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 mb-5">
+          <h4 class="font-bold text-sm border-b dark:border-gray-700 pb-2 mb-3 text-gray-700 dark:text-gray-300">税金の内訳</h4>
+          <div class="flex justify-between items-center mb-3">
+            <div>
+              <span class="font-bold text-gray-800 dark:text-gray-200">所得税 <span class="text-xs text-red-500 bg-red-50 dark:bg-red-900/30 px-1 rounded ml-1" id="resTaxRate">税率 0%</span></span>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">※復興特別所得税(2.1%)含む</p>
+            </div>
+            <div class="font-bold text-lg dark:text-white" id="resIncomeTax">0円</div>
+          </div>
+          <div class="flex justify-between items-center">
+            <div>
+              <span class="font-bold text-gray-800 dark:text-gray-200">住民税 <span class="text-xs text-blue-500 bg-blue-50 dark:bg-blue-900/30 px-1 rounded ml-1">税率 10%</span></span>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">※均等割は本業で支払い済みと仮定</p>
+            </div>
+            <div class="font-bold text-lg dark:text-white" id="resResidentTax">0円</div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
+          <div class="text-sm text-gray-500 dark:text-gray-400 font-bold mb-1">確定申告</div>
+          <div class="text-2xl font-black" id="resTaxReturn">必要</div>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 bg-gray-50 dark:bg-gray-700 inline-block px-3 py-1 rounded-full" id="resTaxReturnReason">副業所得が20万円以上のため</p>
+        </div>
+
+        <!-- 🚀 シェアボタン -->
+        <div class="mt-6 flex justify-center space-x-4">
+          <a href="https://twitter.com/intent/tweet?text=%E5%89%AF%E6%A5%AD%E3%81%AE%E6%89%8B%E5%8F%96%E3%82%8A%E3%81%A8%E7%A8%8E%E9%87%91%E3%81%8C3%E7%A7%92%E3%81%A7%E3%82%8F%E3%81%8B%E3%82%8B%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BC%EF%BC%81&url=https://taxsim.applab-k0314.workers.dev/" target="_blank" rel="noopener noreferrer" class="bg-black dark:bg-gray-700 text-white px-5 py-3 rounded-full font-bold text-sm flex items-center shadow-md hover:opacity-80 transition transform active:scale-95">
+            <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 3.827H5.078z"/></svg>
+            𝕏 でシェア
+          </a>
+          <a href="https://line.me/R/msg/text/?%E5%89%AF%E6%A5%AD%E3%81%AE%E6%89%8B%E5%8F%96%E3%82%8A%E3%81%A8%E7%A8%8E%E9%87%91%E3%81%8C3%E7%A7%92%E3%81%A7%E3%82%8F%E3%81%8B%E3%82%8B%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BC%EF%BC%81%0D%0Ahttps://taxsim.applab-k0314.workers.dev/" target="_blank" rel="noopener noreferrer" class="bg-[#06C755] text-white px-5 py-3 rounded-full font-bold text-sm flex items-center shadow-md hover:opacity-80 transition transform active:scale-95">
+            <svg class="w-5 h-5 mr-1 fill-current" viewBox="0 0 24 24"><path d="M22.2 10.4c0-4.3-4.3-7.8-9.6-7.8s-9.6 3.5-9.6 7.8c0 3.8 2.7 7.1 6.6 7.7.3.1.5.2.5.5v3.2h1.1c.3 0 .5.2.6.2.7.5.1.2.1.5 0 .8l-.3 1.8c-.1.3-.2.6.2.8.4.2.8.1 1.1-.1l4.5-3c.3-.2.6-.3.9-.3 3.3 0 5.5-2.6 5.5-5.2zm-13.8 2.1h-2.1v-4.2c0-.3.2-.5.5-.5s.5.2.5.5v3.2h1.1c.3 0 .5.2.5.5s-.2.5-.5.5zm3.2 0h-1.1c-.3 0-.5-.2-.5-.5v-4.2c0-.3.2-.5.5-.5s.5.2.5.5v4.2c0 .3-.2.5-.5.5zm3.2-3.2v2.7c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-2.7l-1.6 2.7c-.1.2-.3.3-.5.3-.3 0-.5-.2-.5-.5v-4.2c0-.3.2-.5.5-.5s.5.2.5.5v2.7l1.6-2.7c.1-.2.3-.3.5-.3.3 0 .5.2.5.5v4.2c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-2.7z"/></svg>
+            LINE で送る
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ② 副業タイプ別シミュレーター -->
+    <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <h2 class="text-xl font-bold mb-2 border-b-2 border-indigo-100 dark:border-indigo-900 pb-2 flex items-center">
+        <span class="text-2xl mr-2">⏱️</span> 副業タイプ別シミュレーター
+      </h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-5">作業時間から、どれくらい稼げて税金がいくらかかるか計算します。</p>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">副業の種類</label>
+          <select id="jobType" onchange="runTypeSimulation()" class="p-3 w-full border dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 dark:text-white outline-none focus:ring-2 ring-indigo-400">
+            <option value="1500">🚲 デリバリー・Uber等 (目安: 時給1,500円)</option>
+            <option value="1500">🎬 動画編集 (目安: 時給1,500円)</option>
+            <option value="1000">✍️ Webライター (目安: 時給1,000円)</option>
+            <option value="500">💻 ブログ・YouTube (目安: 時給500円 ※収益化後)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">1週間の作業時間</label>
+          <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-indigo-400">
+            <input type="number" min="0" id="workHours" oninput="runTypeSimulation()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10" step="1">
+            <span class="px-4 text-gray-500 dark:text-gray-400 font-bold">時間</span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 bg-indigo-50 dark:bg-indigo-900/20 p-5 rounded-xl border border-indigo-200 dark:border-indigo-800 text-center">
+        <div class="text-sm text-gray-600 dark:text-gray-400 font-bold">予想される月収</div>
+        <div class="text-3xl font-black text-indigo-600 dark:text-indigo-400 mt-1 mb-4" id="typeMonthlyIncome">0円</div>
+        <div class="grid grid-cols-2 gap-3 border-t border-indigo-200 dark:border-indigo-800 pt-4">
+          <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1 font-bold">年間手取り</div>
+            <div class="font-black text-gray-800 dark:text-gray-100 text-lg" id="typeYearlyTakeHome">0円</div>
+          </div>
+          <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1 font-bold">引かれる税金(年)</div>
+            <div class="font-black text-red-500 dark:text-red-400 text-lg" id="typeYearlyTax">0円</div>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-3">※本業年収を元に計算。経費は0円として算出しています。</p>
+      </div>
+    </section>
+
+    <!-- ③ 目標収入＆作業量逆算ツール -->
+    <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <h2 class="text-xl font-bold mb-2 border-b-2 border-green-100 dark:border-green-900 pb-2 flex items-center">
+        <span class="text-2xl mr-2">🎯</span> 目標収入＆作業量シミュレーター
+      </h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-5">欲しい手取り額から、必要な売上と「具体的な作業量」を逆算します。</p>
       <div>
-        <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">本業の年収</label>
-        <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-blue-400">
-          <input type="number" inputmode="numeric" min="0" id="salary" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="400">
+        <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">目標の手取り（年間）</label>
+        <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-green-400">
+          <input type="number" min="0" id="targetTakeHome" oninput="runReverseCalc()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10" step="1">
           <span class="px-4 text-gray-500 dark:text-gray-400 font-bold">万円</span>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">副業の売上</label>
-          <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-blue-400">
-            <input type="number" inputmode="numeric" min="0" id="sideRevenue" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="50">
-            <span class="px-3 text-gray-500 dark:text-gray-400 font-bold">万円</span>
-          </div>
-        </div>
-        <div>
-          <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">副業の経費</label>
-          <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-blue-400">
-            <input type="number" inputmode="numeric" min="0" id="sideExpense" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10">
-            <span class="px-3 text-gray-500 dark:text-gray-400 font-bold">万円</span>
-          </div>
-        </div>
-      </div>
-      <div>
-        <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">扶養家族</label>
-        <select id="hasDependent" onchange="debouncedRun()" class="p-3 w-full border dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 dark:text-white outline-none focus:ring-2 ring-blue-400">
-          <option value="false">なし</option>
-          <option value="true">あり</option>
-        </select>
-      </div>
-    </div>
-
-    <div id="resultArea" class="mt-6 bg-blue-50 dark:bg-blue-900/20 p-5 rounded-xl border border-blue-200 dark:border-blue-800 transition-colors scroll-mt-24">
-      <div class="text-center mb-4">
-        <span class="text-sm text-gray-600 dark:text-gray-400 font-bold">副業所得 (売上 - 経費) = </span>
-        <span class="text-xl font-black text-gray-800 dark:text-gray-100" id="resSideIncome">0円</span>
-      </div>
-      <div class="grid grid-cols-2 gap-4 text-center mb-5">
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-          <div class="text-sm text-gray-500 dark:text-gray-400 font-bold mb-1">副業の手取り</div>
-          <div class="text-2xl font-black text-blue-600 dark:text-blue-400" id="resTakeHome">0円</div>
-        </div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
-          <div class="text-sm text-gray-500 dark:text-gray-400 font-bold mb-1">引かれる税金</div>
-          <div class="text-2xl font-black text-red-500 dark:text-red-400" id="resTotalTax">0円</div>
-        </div>
-      </div>
-
-      <div class="mb-5 bg-gray-200 dark:bg-gray-800 text-gray-400 text-xs text-center py-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
-        スポンサーリンク<br>(ここにAdSenseコードを配置)
-      </div>
-
-      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 mb-5">
-        <h4 class="font-bold text-sm border-b dark:border-gray-700 pb-2 mb-3 text-gray-700 dark:text-gray-300">税金の内訳</h4>
-        <div class="flex justify-between items-center mb-3">
-          <div>
-            <span class="font-bold text-gray-800 dark:text-gray-200">所得税 <span class="text-xs text-red-500 bg-red-50 dark:bg-red-900/30 px-1 rounded ml-1" id="resTaxRate">税率 0%</span></span>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">※復興特別所得税(2.1%)含む</p>
-          </div>
-          <div class="font-bold text-lg dark:text-white" id="resIncomeTax">0円</div>
-        </div>
-        <div class="flex justify-between items-center">
-          <div>
-            <span class="font-bold text-gray-800 dark:text-gray-200">住民税 <span class="text-xs text-blue-500 bg-blue-50 dark:bg-blue-900/30 px-1 rounded ml-1">税率 10%</span></span>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">※均等割は本業で支払い済みと仮定。自治体により異なります。</p>
-          </div>
-          <div class="font-bold text-lg dark:text-white" id="resResidentTax">0円</div>
-        </div>
-      </div>
-
-      <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
-        <div class="text-sm text-gray-500 dark:text-gray-400 font-bold mb-1">確定申告</div>
-        <div class="text-2xl font-black" id="resTaxReturn">必要</div>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 bg-gray-50 dark:bg-gray-700 inline-block px-3 py-1 rounded-full" id="resTaxReturnReason"></p>
-        <p class="text-[10px] text-gray-400 mt-1">※副業所得20万円以下で申告不要になるのは、年末調整済みの給与所得者（会社員など）のみです。</p>
-      </div>
-
-      <div class="mt-6 flex justify-center space-x-4">
-        <a id="shareX" aria-label="Xでシェア" href="#" target="_blank" rel="noopener noreferrer" class="bg-black dark:bg-gray-700 text-white px-5 py-3 rounded-full font-bold text-sm flex items-center shadow-md hover:opacity-80 transition transform active:scale-95">
-          <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 3.827H5.078z"/></svg>
-          𝕏 でシェア
-        </a>
-        <a id="shareLine" aria-label="LINEでシェア" href="#" target="_blank" rel="noopener noreferrer" class="bg-[#06C755] text-white px-5 py-3 rounded-full font-bold text-sm flex items-center shadow-md hover:opacity-80 transition transform active:scale-95">
-          <svg class="w-5 h-5 mr-1 fill-current" viewBox="0 0 24 24"><path d="M22.2 10.4c0-4.3-4.3-7.8-9.6-7.8s-9.6 3.5-9.6 7.8c0 3.8 2.7 7.1 6.6 7.7.3.1.5.2.5.5v3.2h1.1c.3 0 .5.2.6.2.7.5.1.2.1.5 0 .8l-.3 1.8c-.1.3-.2.6.2.8.4.2.8.1 1.1-.1l4.5-3c.3-.2.6-.3.9-.3 3.3 0 5.5-2.6 5.5-5.2zm-13.8 2.1h-2.1v-4.2c0-.3.2-.5.5-.5s.5.2.5.5v3.2h1.1c.3 0 .5.2.5.5s-.2.5-.5.5zm3.2 0h-1.1c-.3 0-.5-.2-.5-.5v-4.2c0-.3.2-.5.5-.5s.5.2.5.5v4.2c0 .3-.2.5-.5.5zm3.2-3.2v2.7c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-2.7l-1.6 2.7c-.1.2-.3.3-.5.3-.3 0-.5-.2-.5-.5v-4.2c0-.3.2-.5.5-.5s.5.2.5.5v2.7l1.6-2.7c.1-.2.3-.3.5-.3.3 0 .5.2.5.5v4.2c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-2.7z"/></svg>
-          LINE で送る
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-    <h2 class="text-xl font-bold mb-2 border-b-2 border-indigo-100 dark:border-indigo-900 pb-2 flex items-center"><span class="text-2xl mr-2">⏱️</span> 副業タイプ別シミュレーター</h2>
-    <div class="space-y-4 mt-4">
-      <div>
-        <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">副業の種類</label>
-        <select id="jobType" onchange="debouncedRun()" class="p-3 w-full border dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 dark:text-white outline-none focus:ring-2 ring-indigo-400">
-          <option value="1500">🚲 デリバリー・Uber等 (目安: 時給1,500円)</option>
-          <option value="1500">🎬 動画編集 (目安: 時給1,500円)</option>
-          <option value="1000">✍️ Webライター (目安: 時給1,000円)</option>
-          <option value="500">💻 ブログ・YouTube (目安: 時給500円 ※収益化後)</option>
-        </select>
-      </div>
-      <div>
-        <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">1週間の作業時間</label>
-        <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-indigo-400">
-          <input type="number" inputmode="numeric" min="0" id="workHours" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10">
-          <span class="px-4 text-gray-500 dark:text-gray-400 font-bold">時間</span>
-        </div>
-      </div>
-    </div>
-    <div class="mt-6 bg-indigo-50 dark:bg-indigo-900/20 p-5 rounded-xl border border-indigo-200 dark:border-indigo-800 text-center">
-      <div class="text-sm text-gray-600 dark:text-gray-400 font-bold">予想される月収</div>
-      <div class="text-3xl font-black text-indigo-600 dark:text-indigo-400 mt-1 mb-4" id="typeMonthlyIncome">0円</div>
-      <div class="grid grid-cols-2 gap-3 border-t border-indigo-200 dark:border-indigo-800 pt-4">
-        <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-          <div class="text-xs text-gray-500 dark:text-gray-400 mb-1 font-bold">年間手取り</div>
-          <div class="font-black text-gray-800 dark:text-gray-100 text-lg" id="typeYearlyTakeHome">0円</div>
-        </div>
-        <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-          <div class="text-xs text-gray-500 dark:text-gray-400 mb-1 font-bold">引かれる税金(年)</div>
-          <div class="font-black text-red-500 dark:text-red-400 text-lg" id="typeYearlyTax">0円</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-    <h2 class="text-xl font-bold mb-2 border-b-2 border-green-100 dark:border-green-900 pb-2 flex items-center"><span class="text-2xl mr-2">🎯</span> 目標収入＆作業量シミュレーター</h2>
-    <div class="mt-4">
-      <label class="block text-sm font-bold mb-1 text-gray-700 dark:text-gray-300">目標の手取り（年間）</label>
-      <div class="flex items-center bg-gray-50 dark:bg-gray-700 border dark:border-gray-600 rounded-lg overflow-hidden focus-within:ring-2 ring-green-400">
-        <input type="number" inputmode="numeric" min="0" id="targetTakeHome" oninput="debouncedRun()" class="p-3 w-full text-right bg-transparent outline-none text-xl font-bold dark:text-white" value="10">
-        <span class="px-4 text-gray-500 dark:text-gray-400 font-bold">万円</span>
-      </div>
-    </div>
-    <div class="mt-6 bg-green-50 dark:bg-green-900/20 p-5 rounded-xl border border-green-200 dark:border-green-800 text-center">
-      <div class="text-sm text-gray-600 dark:text-gray-400 font-bold">目標達成に必要な副業売上（目安）</div>
-      <div class="text-3xl font-black text-green-600 dark:text-green-400 mt-2" id="resRequiredRevenue">0円</div>
-      <div class="mt-5 border-t border-green-200 dark:border-green-800 pt-4">
-        <div class="text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">これを達成するための作業量目安</div>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">💻 ブログ (1PV=0.3円)</div>
-            <div class="font-bold text-gray-800 dark:text-gray-100"><span id="workBlog" class="text-lg text-green-600 dark:text-green-400">0</span> PV</div>
-          </div>
-          <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">🎬 動画編集 (1本5千円)</div>
-            <div class="font-bold text-gray-800 dark:text-gray-100"><span id="workVideo" class="text-lg text-green-600 dark:text-green-400">0</span> 本</div>
-          </div>
-          <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">✍️ Webライター (1記事3千円)</div>
-            <div class="font-bold text-gray-800 dark:text-gray-100"><span id="workWriter" class="text-lg text-green-600 dark:text-green-400">0</span> 記事</div>
-          </div>
-          <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-            <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">🚲 デリバリー (時給1.5千円)</div>
-            <div class="font-bold text-gray-800 dark:text-gray-100"><span id="workDelivery" class="text-lg text-green-600 dark:text-green-400">0</span> 時間</div>
+      <div class="mt-6 bg-green-50 dark:bg-green-900/20 p-5 rounded-xl border border-green-200 dark:border-green-800 text-center">
+        <div class="text-sm text-gray-600 dark:text-gray-400 font-bold">目標達成に必要な副業売上（目安）</div>
+        <div class="text-3xl font-black text-green-600 dark:text-green-400 mt-2" id="resRequiredRevenue">0円</div>
+        <div class="mt-5 border-t border-green-200 dark:border-green-800 pt-4">
+          <div class="text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">これを達成するための作業量目安</div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+              <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">💻 ブログ (1PV=0.3円)</div>
+              <div class="font-bold text-gray-800 dark:text-gray-100"><span id="workBlog" class="text-lg text-green-600 dark:text-green-400">0</span> PV</div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+              <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">🎬 動画編集 (1本5千円)</div>
+              <div class="font-bold text-gray-800 dark:text-gray-100"><span id="workVideo" class="text-lg text-green-600 dark:text-green-400">0</span> 本</div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+              <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">✍️ Webライター (1記事3千円)</div>
+              <div class="font-bold text-gray-800 dark:text-gray-100"><span id="workWriter" class="text-lg text-green-600 dark:text-green-400">0</span> 記事</div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+              <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">🚲 デリバリー (時給1.5千円)</div>
+              <div class="font-bold text-gray-800 dark:text-gray-100"><span id="workDelivery" class="text-lg text-green-600 dark:text-green-400">0</span> 時間</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-    <h2 class="text-xl font-bold mb-4 border-b-2 border-red-100 dark:border-red-900 pb-2 flex items-center"><span class="text-2xl mr-2">🚨</span> 副業バレ危険度診断</h2>
-    <div class="space-y-3 text-sm font-bold text-gray-700 dark:text-gray-300">
-      <label class="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition">
-        <input type="checkbox" class="bare-check w-5 h-5 text-red-600 rounded focus:ring-red-500" onchange="calcBareRisk()">
-        <span>確定申告で住民税を「特別徴収（給与天引き）」にしている</span>
-      </label>
-      <label class="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition">
-        <input type="checkbox" class="bare-check w-5 h-5 text-red-600 rounded focus:ring-red-500" onchange="calcBareRisk()">
-        <span>会社の同僚に副業のことを少しでも話した</span>
-      </label>
-      <label class="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition">
-        <input type="checkbox" class="bare-check w-5 h-5 text-red-600 rounded focus:ring-red-500" onchange="calcBareRisk()">
-        <span>SNSやブログで本名・顔出し・会社が特定できる発信をしている</span>
-      </label>
-      <label class="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition">
-        <input type="checkbox" class="bare-check w-5 h-5 text-red-600 rounded focus:ring-red-500" onchange="calcBareRisk()">
-        <span>会社のPCやスマホを使って副業の作業・連絡をした</span>
-      </label>
-    </div>
-    <div id="bareResult" class="mt-5 p-4 rounded-xl text-center font-bold bg-blue-50 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-800 transition-colors">
-      チェックを入れて危険度を判定！
-    </div>
-  </section>
+    <!-- ④ 副業バレ危険度診断 -->
+    <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <h2 class="text-xl font-bold mb-4 border-b-2 border-red-100 dark:border-red-900 pb-2 flex items-center">
+        <span class="text-2xl mr-2">🚨</span> 副業バレ危険度診断
+      </h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">当てはまるものにチェックを入れてください。</p>
+      <div class="space-y-3 text-sm font-bold text-gray-700 dark:text-gray-300">
+        <label class="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+          <input type="checkbox" class="bare-check w-5 h-5 text-red-600 rounded focus:ring-red-500" onchange="calcBareRisk()">
+          <span>確定申告で住民税を「特別徴収（給与天引き）」にしている</span>
+        </label>
+        <label class="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+          <input type="checkbox" class="bare-check w-5 h-5 text-red-600 rounded focus:ring-red-500" onchange="calcBareRisk()">
+          <span>会社の同僚に副業のことを少しでも話した</span>
+        </label>
+        <label class="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+          <input type="checkbox" class="bare-check w-5 h-5 text-red-600 rounded focus:ring-red-500" onchange="calcBareRisk()">
+          <span>SNSやブログで本名・顔出し・会社が特定できる発信をしている</span>
+        </label>
+        <label class="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+          <input type="checkbox" class="bare-check w-5 h-5 text-red-600 rounded focus:ring-red-500" onchange="calcBareRisk()">
+          <span>会社のPCやスマホを使って副業の作業・連絡をした</span>
+        </label>
+      </div>
+      <div id="bareResult" class="mt-5 p-4 rounded-xl text-center font-bold bg-blue-50 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-800 transition-colors">
+        チェックを入れて危険度を判定！
+      </div>
+    </section>
 
-  <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-    <h2 class="text-xl font-bold mb-5 border-b-2 border-yellow-100 dark:border-yellow-900 pb-2 flex items-center"><span class="text-2xl mr-2">📖</span> 税金の仕組み</h2>
-    <div class="flex flex-col items-center space-y-2">
-      <div class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 w-full text-center py-3 rounded-lg font-bold shadow-sm">副業売上</div>
-      <div class="text-gray-400 font-bold text-sm">⬇︎ 引く</div>
-      <div class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 w-full text-center py-3 rounded-lg font-bold shadow-sm">経費 <span class="text-xs font-normal ml-1">（仕事に使ったお金）</span></div>
-      <div class="text-gray-400 font-bold text-sm">⬇︎ イコール</div>
-      <div class="bg-blue-200 dark:bg-blue-800 text-blue-900 dark:text-blue-100 w-full text-center py-3 rounded-lg font-bold shadow-sm">副業所得 <span class="text-xs font-normal ml-1">（20万以上で確定申告）</span></div>
-      <div class="text-gray-400 font-bold text-sm">⬇︎ 引く</div>
-      <div class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 w-full text-center py-3 rounded-lg font-bold shadow-sm">所得税 ＆ 住民税</div>
-      <div class="text-gray-400 font-bold text-sm">⬇︎ イコール</div>
-      <div class="bg-yellow-300 dark:bg-yellow-600 text-yellow-900 dark:text-yellow-50 w-full text-center py-4 rounded-lg font-black text-xl shadow-md border border-yellow-400 dark:border-yellow-500">手取り</div>
-    </div>
-  </section>
+    <!-- ⑤ 税金の仕組み（流れ図） -->
+    <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <h2 class="text-xl font-bold mb-5 border-b-2 border-yellow-100 dark:border-yellow-900 pb-2 flex items-center">
+        <span class="text-2xl mr-2">📖</span> 税金の仕組み
+      </h2>
+      <div class="flex flex-col items-center space-y-2">
+        <div class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 w-full text-center py-3 rounded-lg font-bold shadow-sm">副業売上</div>
+        <div class="text-gray-400 font-bold text-sm">⬇︎ 引く</div>
+        <div class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 w-full text-center py-3 rounded-lg font-bold shadow-sm">経費 <span class="text-xs font-normal ml-1">（仕事に使ったお金）</span></div>
+        <div class="text-gray-400 font-bold text-sm">⬇︎ イコール</div>
+        <div class="bg-blue-200 dark:bg-blue-800 text-blue-900 dark:text-blue-100 w-full text-center py-3 rounded-lg font-bold shadow-sm">副業所得 <span class="text-xs font-normal ml-1">（20万以上で確定申告）</span></div>
+        <div class="text-gray-400 font-bold text-sm">⬇︎ 引く</div>
+        <div class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 w-full text-center py-3 rounded-lg font-bold shadow-sm">所得税 ＆ 住民税</div>
+        <div class="text-gray-400 font-bold text-sm">⬇︎ イコール</div>
+        <div class="bg-yellow-300 dark:bg-yellow-600 text-yellow-900 dark:text-yellow-50 w-full text-center py-4 rounded-lg font-black text-xl shadow-md border border-yellow-400 dark:border-yellow-500">手取り</div>
+      </div>
+    </section>
 
-  <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
-    <h2 class="text-xl font-bold mb-4 border-b-2 border-purple-100 dark:border-purple-900 pb-2 flex items-center"><span class="text-2xl mr-2">📊</span> 税金早見表</h2>
-    <div class="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
-      <table class="w-full text-center border-collapse">
-        <thead>
-          <tr class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
-            <th scope="col" class="p-3 border-b dark:border-gray-600 font-bold">副業利益(所得)</th>
-            <th scope="col" class="p-3 border-b dark:border-gray-600 font-bold">税金の目安</th>
-          </tr>
-        </thead>
-        <tbody class="text-gray-600 dark:text-gray-300">
-          <tr class="border-b dark:border-gray-700"><td class="p-3 font-bold">10万円</td><td class="p-3">ほぼ0円 〜 1万円</td></tr>
-          <tr class="border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50"><td class="p-3 font-bold">30万円</td><td class="p-3">3万円 〜 5万円</td></tr>
-          <tr><td class="p-3 font-bold">100万円</td><td class="p-3">15万円 〜 25万円</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <!-- ⑥ 税金早見表 -->
+    <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
+      <h2 class="text-xl font-bold mb-4 border-b-2 border-purple-100 dark:border-purple-900 pb-2 flex items-center">
+        <span class="text-2xl mr-2">📊</span> 税金早見表
+      </h2>
+      <div class="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
+        <table class="w-full text-center border-collapse">
+          <thead>
+            <tr class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+              <th class="p-3 border-b dark:border-gray-600 font-bold">副業利益(所得)</th>
+              <th class="p-3 border-b dark:border-gray-600 font-bold">税金の目安</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-600 dark:text-gray-300">
+            <tr class="border-b dark:border-gray-700">
+              <td class="p-3 font-bold">10万円</td>
+              <td class="p-3">ほぼ0円 〜 1万円</td>
+            </tr>
+            <tr class="border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
+              <td class="p-3 font-bold">30万円</td>
+              <td class="p-3">3万円 〜 5万円</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold">100万円</td>
+              <td class="p-3">15万円 〜 25万円</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
-    <h2 class="text-xl font-bold mb-4 border-b-2 border-orange-100 dark:border-orange-900 pb-2 flex items-center"><span class="text-2xl mr-2">💡</span> 税金クイズ <span class="text-sm text-gray-500 dark:text-gray-400 ml-2 font-normal">(全10問)</span></h2>
-    <div class="bg-orange-50 dark:bg-gray-700/50 p-5 rounded-xl border border-orange-100 dark:border-gray-600 transition-colors">
-      <div class="flex justify-between items-center mb-4"><span id="quizProgress" class="text-xs font-bold text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/50 px-2 py-1 rounded">1 / 10</span></div>
-      <p id="quizQuestion" class="font-bold text-gray-800 dark:text-gray-100 mb-5 text-center text-lg leading-relaxed">読み込み中...</p>
-      <div id="quizChoices" class="space-y-3"></div>
-      <div id="quizResult" class="hidden mt-5 font-bold text-center p-4 rounded-lg shadow-inner transition-colors"></div>
-      <button id="nextQuizBtn" onclick="nextQuiz()" class="hidden w-full mt-5 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition transform active:scale-95 shadow-md">次の問題へ ➔</button>
-    </div>
-  </section>
+    <!-- ⑦ 税金クイズ (全10問) -->
+    <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-colors">
+      <h2 class="text-xl font-bold mb-4 border-b-2 border-orange-100 dark:border-orange-900 pb-2 flex items-center">
+        <span class="text-2xl mr-2">💡</span> 税金クイズ <span class="text-sm text-gray-500 dark:text-gray-400 ml-2 font-normal">(全10問)</span>
+      </h2>
+      <div class="bg-orange-50 dark:bg-gray-700/50 p-5 rounded-xl border border-orange-100 dark:border-gray-600 transition-colors">
+        <div class="flex justify-between items-center mb-4">
+          <span id="quizProgress" class="text-xs font-bold text-orange-600 dark:text-orange-400 bg-orange-100 dark:bg-orange-900/50 px-2 py-1 rounded">1 / 10</span>
+        </div>
+        <p id="quizQuestion" class="font-bold text-gray-800 dark:text-gray-100 mb-5 text-center text-lg leading-relaxed">読み込み中...</p>
+        <div id="quizChoices" class="space-y-3"></div>
+        <div id="quizResult" class="hidden mt-5 font-bold text-center p-4 rounded-lg shadow-inner transition-colors"></div>
+        <button id="nextQuizBtn" onclick="nextQuiz()" class="hidden w-full mt-5 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition transform active:scale-95 shadow-md">
+          次の問題へ ➔
+        </button>
+      </div>
+    </section>
 
-  <div class="bg-gray-200 dark:bg-gray-800 text-gray-400 text-xs text-center py-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
-    スポンサーリンク<br>(ここにAdSenseコードを配置)
+    <!-- 💰 AdSense対策 ③ FAQの上 -->
+    <div class="bg-gray-200 dark:bg-gray-800 text-gray-400 text-xs text-center py-4 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
+      スポンサーリンク<br>(ここにAdSenseコードを配置)
+    </div>
+
+    <!-- ⑧ よくある質問 (FAQ Schema対応) -->
+    <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <h2 class="text-xl font-bold mb-4 border-b-2 border-gray-100 dark:border-gray-700 pb-2 flex items-center">
+        <span class="text-2xl mr-2">❓</span> よくある質問
+      </h2>
+      <div class="space-y-3">
+        <details class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 cursor-pointer group">
+          <summary class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center outline-none">
+            副業が会社にバレない方法はありますか？
+            <span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mt-3 leading-relaxed border-t dark:border-gray-600 pt-3">
+            確定申告の際に、住民税の徴収方法を「自分で納付（普通徴収）」にチェックすることで、会社に副業分の住民税通知がいかなくなり、税金経由でバレるのを防げます。
+          </p>
+        </details>
+        <details class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 cursor-pointer group">
+          <summary class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center outline-none">
+            売上が20万円以下なら税金は一切かからない？
+            <span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mt-3 leading-relaxed border-t dark:border-gray-600 pt-3">
+            国の税金である「所得税」の確定申告は不要ですが、お住まいの市区町村へ「住民税の申告」は必要になる場合があります。住民税は少額でもかかることがあります。
+          </p>
+        </details>
+        <details class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 cursor-pointer group">
+          <summary class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center outline-none">
+            経費にはどんなものが含まれますか？
+            <span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mt-3 leading-relaxed border-t dark:border-gray-600 pt-3">
+            副業のために直接使ったお金です。例えば、仕事用のパソコン代、インターネット代の一部、打ち合わせのカフェ代、勉強用の書籍代などが該当します。
+          </p>
+        </details>
+        <details class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 cursor-pointer group">
+          <summary class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center outline-none">
+            アルバイト（パート）の副業でもこの計算で合っていますか？
+            <span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mt-3 leading-relaxed border-t dark:border-gray-600 pt-3">
+            アルバイトは「給与所得」となるため、このシミュレーター（事業所得・雑所得を想定）とは税金の計算方法が異なります。アルバイトの場合は、本業と副業の給与を合算して計算されます。
+          </p>
+        </details>
+        <details class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 cursor-pointer group">
+          <summary class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center outline-none">
+            青色申告と白色申告の違いは何ですか？
+            <span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mt-3 leading-relaxed border-t dark:border-gray-600 pt-3">
+            青色申告は事前の申請と複式簿記での記帳が必要ですが、最大65万円の特別控除が受けられ税金が安くなります。白色申告は手続きが簡単ですが、特別控除はありません。
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ⑨ ご意見・ご要望 (X DMリンク) -->
+    <section class="bg-blue-50 dark:bg-blue-900/30 rounded-2xl shadow-sm border border-blue-200 dark:border-blue-800 p-6 text-center">
+      <h2 class="text-lg font-bold text-blue-800 dark:text-blue-300 mb-2">💡 ご意見・ご要望をお聞かせください</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">「こんな機能が欲しい」「ここが使いにくい」など、開発者へ直接メッセージを送れます。</p>
+      <a href="https://twitter.com/messages/compose?recipient_id=2032694737069838336" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-black dark:bg-white text-white dark:text-black font-bold py-3 px-6 rounded-full shadow-md hover:opacity-80 transition transform active:scale-95">
+        <svg class="w-5 h-5 mr-2 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 3.827H5.078z"/></svg>
+        開発者（@AppLab_K）にDMを送る
+      </a>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 border-t dark:border-gray-800">
+    <div class="flex justify-center space-x-4 mb-4 text-sm">
+      <button onclick="openModal('termsModal')" class="hover:underline hover:text-blue-500">利用規約</button>
+      <button onclick="openModal('privacyModal')" class="hover:underline hover:text-blue-500">プライバシーポリシー</button>
+    </div>
+    <p class="text-sm font-bold">© 2026 副業手取りシミュレーター by AppLab_K</p>
+    <!-- 🔐 信頼性UP (Google評価対策) -->
+    <p class="text-xs mt-3 text-red-500 dark:text-red-400 font-bold">※本サイトは税理士監修ではありません。計算結果はあくまで参考値としてご利用ください。</p>
+  </footer>
+
+  <!-- 🔥 UX改善: スクロール追従ボタン (FAB) -->
+  <button onclick="document.getElementById('resultArea').scrollIntoView({behavior: 'smooth'})" class="fixed bottom-6 right-6 bg-blue-600 text-white w-14 h-14 rounded-full shadow-2xl hover:bg-blue-700 transition-transform transform hover:scale-110 z-50 flex flex-col items-center justify-center border-2 border-white dark:border-gray-800">
+    <span class="text-xl leading-none">👇</span>
+    <span class="text-[10px] font-bold mt-0.5">結果へ</span>
+  </button>
+
+  <!-- 利用規約モーダル -->
+  <div id="termsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-lg w-full max-h-[80vh] flex flex-col">
+      <div class="p-5 border-b dark:border-gray-700 flex justify-between items-center">
+        <h3 class="text-lg font-bold dark:text-white">利用規約</h3>
+        <button onclick="closeModal('termsModal')" class="text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <div class="p-5 overflow-y-auto text-sm text-gray-600 dark:text-gray-300 space-y-4">
+        <p>当サイト「副業手取りシミュレーター」（以下、「本サービス」）をご利用いただくにあたり、以下の利用規約にご同意いただいたものとみなします。</p>
+        <h4 class="font-bold text-gray-800 dark:text-gray-200">1. 免責事項</h4>
+        <p>本サービスが提供する計算結果は、一般的な税制に基づく簡易的な概算であり、正確性を保証するものではありません。実際の税額は、個人の控除状況や自治体によって異なります。本サービスの利用により生じたいかなる損害についても、運営者は一切の責任を負いません。正確な税務相談は、税理士または管轄の税務署へお問い合わせください。</p>
+        <h4 class="font-bold text-gray-800 dark:text-gray-200">2. 著作権</h4>
+        <p>本サービスに関するプログラム、デザイン、テキスト等の著作権は、運営者（AppLab_K）に帰属します。無断での複製・転載を禁じます。</p>
+        <h4 class="font-bold text-gray-800 dark:text-gray-200">3. 規約の変更</h4>
+        <p>運営者は、必要と判断した場合には、ユーザーに通知することなく本規約を変更することができるものとします。</p>
+      </div>
+      <div class="p-4 border-t dark:border-gray-700 text-center">
+        <button onclick="closeModal('termsModal')" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">閉じる</button>
+      </div>
+    </div>
   </div>
 
-  <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-    <h2 class="text-xl font-bold mb-4 border-b-2 border-gray-100 dark:border-gray-700 pb-2 flex items-center"><span class="text-2xl mr-2">❓</span> よくある質問</h2>
-    <div class="space-y-3">
-      <details class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 cursor-pointer group">
-        <summary class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center outline-none">副業が会社にバレない方法はありますか？<span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span></summary>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mt-3 leading-relaxed border-t dark:border-gray-600 pt-3">確定申告の際に、住民税の徴収方法を「自分で納付（普通徴収）」にチェックすることで、会社に副業分の住民税通知がいかなくなり、税金経由でバレるのを防げます。</p>
-      </details>
-      <details class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 cursor-pointer group">
-        <summary class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center outline-none">売上が20万円以下なら税金は一切かからない？<span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span></summary>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mt-3 leading-relaxed border-t dark:border-gray-600 pt-3">国の税金である「所得税」の確定申告は不要ですが、お住まいの市区町村へ「住民税の申告」は必要になる場合があります。住民税は少額でもかかることがあります。</p>
-      </details>
-      <details class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 cursor-pointer group">
-        <summary class="font-bold text-gray-800 dark:text-gray-200 flex justify-between items-center outline-none">経費にはどんなものが含まれますか？<span class="text-gray-400 group-open:rotate-180 transition-transform">▼</span></summary>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mt-3 leading-relaxed border-t dark:border-gray-600 pt-3">副業のために直接使ったお金です。例えば、仕事用のパソコン代、インターネット代の一部、打ち合わせのカフェ代、勉強用の書籍代などが該当します。</p>
-      </details>
-    </div>
-  </section>
-</main>
-
-<footer class="text-center p-6 mt-8 text-gray-500 dark:text-gray-400 border-t dark:border-gray-800">
-  <div class="flex flex-wrap justify-center gap-4 mb-4 text-sm">
-    <button aria-label="利用規約を開く" onclick="openModal('termsModal')" class="hover:underline hover:text-blue-500">利用規約</button>
-    <button aria-label="プライバシーポリシーを開く" onclick="openModal('privacyModal')" class="hover:underline hover:text-blue-500">プライバシーポリシー</button>
-    <button aria-label="運営者情報を開く" onclick="openModal('operatorModal')" class="hover:underline hover:text-blue-500">運営者情報</button>
-    <a aria-label="お問い合わせ" href="https://x.com/messages/compose?recipient_id=2032694737069838336" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-blue-500">お問い合わせ</a>
-  </div>
-  <p class="text-sm font-bold">© 2026 副業手取りシミュレーター by AppLab_K</p>
-  <p class="text-xs mt-3 text-red-500 dark:text-red-400 font-bold">※ 本サイトは税理士監修ではありません。社会保険料（上限ありの15%で概算）や税金はあくまで参考値としてご利用ください。</p>
-</footer>
-
-<button aria-label="結果へスクロール" onclick="document.getElementById('resultArea').scrollIntoView({behavior: 'smooth'})" class="fixed bottom-6 right-6 bg-blue-600 text-white w-14 h-14 rounded-full shadow-2xl hover:bg-blue-700 transition-transform transform hover:scale-110 z-50 flex flex-col items-center justify-center border-2 border-white dark:border-gray-800">
-  <span class="text-xl leading-none">👇</span><span class="text-[10px] font-bold mt-0.5">結果へ</span>
-</button>
-
-<!-- モーダル群 -->
-<div id="termsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-lg w-full max-h-[80vh] flex flex-col">
-    <div class="p-5 border-b dark:border-gray-700 flex justify-between items-center">
-      <h3 class="text-lg font-bold dark:text-white">利用規約</h3>
-      <button aria-label="閉じる" onclick="closeModal('termsModal')" class="text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl leading-none">&times;</button>
-    </div>
-    <div class="p-5 overflow-y-auto text-sm text-gray-600 dark:text-gray-300 space-y-4">
-      <p>当サイトが提供する計算結果は簡易的な概算であり、正確性を保証するものではありません。実際の税額は個人の状況により異なります。本サービスの利用により生じたいかなる損害についても運営者は責任を負いません。</p>
-    </div>
-    <div class="p-4 border-t dark:border-gray-700 text-center">
-      <button onclick="closeModal('termsModal')" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">閉じる</button>
+  <!-- プライバシーポリシーモーダル -->
+  <div id="privacyModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-lg w-full max-h-[80vh] flex flex-col">
+      <div class="p-5 border-b dark:border-gray-700 flex justify-between items-center">
+        <h3 class="text-lg font-bold dark:text-white">プライバシーポリシー</h3>
+        <button onclick="closeModal('privacyModal')" class="text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <div class="p-5 overflow-y-auto text-sm text-gray-600 dark:text-gray-300 space-y-4">
+        <h4 class="font-bold text-gray-800 dark:text-gray-200">1. 入力データの取り扱いについて</h4>
+        <p>本サービスで入力された金額（年収、売上、経費など）や選択項目は、すべてユーザーのブラウザ上（ローカル環境）でのみ処理されます。<strong>これらのデータが外部のサーバーに送信・保存されることは一切ありません。</strong>安心してご利用ください。</p>
+        <h4 class="font-bold text-gray-800 dark:text-gray-200">2. 広告の配信について</h4>
+        <p>本サービスでは、第三者配信の広告サービス（Google AdSense等）を利用する場合があります。広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります。Cookieを無効にする設定およびGoogleアドセンスに関する詳細は「Googleポリシーと規約」をご確認ください。</p>
+        <h4 class="font-bold text-gray-800 dark:text-gray-200">3. アクセス解析ツールについて</h4>
+        <p>本サービスでは、Googleによるアクセス解析ツール「Google Analytics」を利用しています。このGoogle Analyticsはトラフィックデータの収集のためにCookieを使用しています。このトラフィックデータは匿名で収集されており、個人を特定するものではありません。</p>
+      </div>
+      <div class="p-4 border-t dark:border-gray-700 text-center">
+        <button onclick="closeModal('privacyModal')" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">閉じる</button>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="privacyModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-lg w-full max-h-[80vh] flex flex-col">
-    <div class="p-5 border-b dark:border-gray-700 flex justify-between items-center">
-      <h3 class="text-lg font-bold dark:text-white">プライバシーポリシー</h3>
-      <button aria-label="閉じる" onclick="closeModal('privacyModal')" class="text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl leading-none">&times;</button>
-    </div>
-    <div class="p-5 overflow-y-auto text-sm text-gray-600 dark:text-gray-300 space-y-4">
-      <p>入力されたデータはすべてブラウザ上でのみ処理され、外部サーバーに送信・保存されることは一切ありません。本サイトではGoogle AdSense等の広告配信やGoogle Analyticsを利用しており、Cookieを使用する場合があります。</p>
-    </div>
-    <div class="p-4 border-t dark:border-gray-700 text-center">
-      <button onclick="closeModal('privacyModal')" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">閉じる</button>
-    </div>
-  </div>
-</div>
+  <!-- スクリプト -->
+  <script>
+    // モーダル制御
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+      document.body.classList.add('modal-open');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+      document.body.classList.remove('modal-open');
+    }
 
-<div id="operatorModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-lg w-full max-h-[80vh] flex flex-col">
-    <div class="p-5 border-b dark:border-gray-700 flex justify-between items-center">
-      <h3 class="text-lg font-bold dark:text-white">運営者情報</h3>
-      <button aria-label="閉じる" onclick="closeModal('operatorModal')" class="text-gray-500 hover:text-gray-800 dark:hover:text-white text-2xl leading-none">&times;</button>
-    </div>
-    <div class="p-5 overflow-y-auto text-sm text-gray-600 dark:text-gray-300 space-y-4">
-      <p><strong>運営者:</strong> AppLab_K</p>
-      <p><strong>目的:</strong> 副業を始める方の税金や手取りに関する不安を解消し、適切な目標設定をサポートするための無料ツールを提供しています。</p>
-      <p><strong>お問い合わせ:</strong> X（旧Twitter）のDMにて受け付けております。</p>
-    </div>
-    <div class="p-4 border-t dark:border-gray-700 text-center">
-      <button onclick="closeModal('operatorModal')" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">閉じる</button>
-    </div>
-  </div>
-</div>
+    // 金額フォーマット関数
+    function formatCurrency(num) {
+      return new Intl.NumberFormat('ja-JP').format(Math.round(num)) + '円';
+    }
+    function formatNumber(num) {
+      return new Intl.NumberFormat('ja-JP').format(Math.round(num));
+    }
 
-<script>
-// モーダル制御
-function openModal(id){document.getElementById(id).classList.remove('hidden');document.body.classList.add('modal-open');}
-function closeModal(id){document.getElementById(id).classList.add('hidden');document.body.classList.remove('modal-open');}
+    // 所得税率と税額を返す関数
+    function getIncomeTaxInfo(taxable) {
+      if (taxable <= 0) return { tax: 0, rate: 0 };
+      if (taxable <= 1950000) return { tax: taxable * 0.05, rate: 5 };
+      if (taxable <= 3300000) return { tax: taxable * 0.10 - 97500, rate: 10 };
+      if (taxable <= 6950000) return { tax: taxable * 0.20 - 427500, rate: 20 };
+      if (taxable <= 9000000) return { tax: taxable * 0.23 - 636000, rate: 23 };
+      if (taxable <= 18000000) return { tax: taxable * 0.33 - 1536000, rate: 33 };
+      if (taxable <= 40000000) return { tax: taxable * 0.40 - 2796000, rate: 40 };
+      return { tax: taxable * 0.45 - 4796000, rate: 45 };
+    }
 
-// ESCキーでモーダルを閉じる
-document.addEventListener("keydown", e => {
-  if(e.key === "Escape"){
-    document.querySelectorAll("[id$='Modal']").forEach(m => m.classList.add("hidden"));
-    document.body.classList.remove("modal-open");
-  }
-});
+    // 税金計算メインロジック
+    function calculateTax(salary, sideRevenue, sideExpense, hasDependent) {
+      let salaryDeduction = 0;
+      if (salary <= 1625000) salaryDeduction = 550000;
+      else if (salary <= 1800000) salaryDeduction = salary * 0.4 - 100000;
+      else if (salary <= 3600000) salaryDeduction = salary * 0.3 + 80000;
+      else if (salary <= 6600000) salaryDeduction = salary * 0.2 + 440000;
+      else if (salary <= 8500000) salaryDeduction = salary * 0.1 + 1100000;
+      else salaryDeduction = 1950000;
 
-const formatCurrency = n => new Intl.NumberFormat('ja-JP').format(Math.round(n)) + '円';
-const formatNumber = n => new Intl.NumberFormat('ja-JP').format(Math.round(n));
-const getNum = id => { const v = parseFloat(document.getElementById(id).value); return (isNaN(v) || v < 0) ? 0 : v; };
+      let salaryIncome = Math.max(0, salary - salaryDeduction);
+      let basicDeduction = 480000; 
+      let socialInsurance = salary * 0.15; 
+      let dependentDeduction = hasDependent ? 380000 : 0; 
+      let totalDeduction = basicDeduction + socialInsurance + dependentDeduction;
+      
+      let taxableIncomeBase = Math.max(0, salaryIncome - totalDeduction);
+      let sideIncome = Math.max(0, sideRevenue - sideExpense);
+      let taxableIncomeTotal = taxableIncomeBase + sideIncome;
+      
+      let baseInfo = getIncomeTaxInfo(taxableIncomeBase);
+      let totalInfo = getIncomeTaxInfo(taxableIncomeTotal);
+      
+      let sideIncomeTax = Math.max(0, totalInfo.tax - baseInfo.tax) * 1.021;
+      let sideResidentTax = sideIncome * 0.10; 
+      
+      let totalSideTax = sideIncomeTax + sideResidentTax;
+      let sideTakeHome = sideIncome - totalSideTax;
+      let needsTaxReturn = sideIncome >= 200000;
+      
+      return {
+        sideIncome: sideIncome,
+        incomeTax: sideIncomeTax,
+        residentTax: sideResidentTax,
+        totalTax: totalSideTax,
+        takeHome: sideTakeHome,
+        needsTaxReturn: needsTaxReturn,
+        appliedTaxRate: totalInfo.rate
+      };
+    }
 
-function getIncomeTaxInfo(taxable) {
-  if(taxable<=0) return {tax:0, rate:0};
-  if(taxable<=1950000) return {tax:taxable*0.05, rate:5};
-  if(taxable<=3300000) return {tax:taxable*0.10-97500, rate:10};
-  if(taxable<=6950000) return {tax:taxable*0.20-427500, rate:20};
-  if(taxable<=9000000) return {tax:taxable*0.23-636000, rate:23};
-  if(taxable<=18000000) return {tax:taxable*0.33-1536000, rate:33};
-  if(taxable<=40000000) return {tax:taxable*0.40-2796000, rate:40};
-  return {tax:taxable*0.45-4796000, rate:45};
-}
+    // ① メインシミュレーター実行
+    function runSimulation() {
+      const salary = Math.max(0, Number(document.getElementById('salary').value) || 0) * 10000;
+      const sideRevenue = Math.max(0, Number(document.getElementById('sideRevenue').value) || 0) * 10000;
+      const sideExpense = Math.max(0, Number(document.getElementById('sideExpense').value) || 0) * 10000;
+      const hasDependent = document.getElementById('hasDependent').value === 'true';
 
-function calculateTax(salary, sideRevenue, sideExpense, hasDependent) {
-  let salaryDeduction = 0;
-  if(salary<=1625000) salaryDeduction=550000;
-  else if(salary<=1800000) salaryDeduction=salary*0.4-100000;
-  else if(salary<=3600000) salaryDeduction=salary*0.3+80000;
-  else if(salary<=6600000) salaryDeduction=salary*0.2+440000;
-  else if(salary<=8500000) salaryDeduction=salary*0.1+1100000;
-  else salaryDeduction=1950000;
+      const result = calculateTax(salary, sideRevenue, sideExpense, hasDependent);
 
-  let salaryIncome = Math.max(0, salary - salaryDeduction);
-  
-  // 社会保険料（約15%だが上限あり。あくまで参考値として算出）
-  let socialInsurance = Math.min(salary * 0.15, 1200000);
+      document.getElementById('resSideIncome').innerText = formatCurrency(result.sideIncome);
+      document.getElementById('resTakeHome').innerText = formatCurrency(result.takeHome);
+      document.getElementById('resTotalTax').innerText = formatCurrency(result.totalTax);
+      document.getElementById('resIncomeTax').innerText = formatCurrency(result.incomeTax);
+      document.getElementById('resResidentTax').innerText = formatCurrency(result.residentTax);
+      document.getElementById('resTaxRate').innerText = `税率 ${result.appliedTaxRate}%`;
 
-  let totalDeduction = 480000 + socialInsurance + (hasDependent ? 380000 : 0);
-  let taxableIncomeBase = Math.max(0, salaryIncome - totalDeduction);
-  let sideIncome = Math.max(0, sideRevenue - sideExpense);
-  
-  let baseInfo = getIncomeTaxInfo(taxableIncomeBase);
-  let totalInfo = getIncomeTaxInfo(taxableIncomeBase + sideIncome);
-  
-  // 復興特別所得税2.1%加算
-  let sideIncomeTax = Math.max(0, totalInfo.tax - baseInfo.tax) * 1.021;
-  // 所得割10% (均等割は本業で支払い済みと仮定)
-  let sideResidentTax = sideIncome * 0.10; 
-  let totalSideTax = sideIncomeTax + sideResidentTax;
-  
-  return {
-    sideIncome, incomeTax: sideIncomeTax, residentTax: sideResidentTax,
-    totalTax: totalSideTax, takeHome: sideIncome - totalSideTax,
-    needsTaxReturn: sideIncome >= 200000, appliedTaxRate: totalInfo.rate
-  };
-}
+      const taxReturnEl = document.getElementById('resTaxReturn');
+      const taxReturnReasonEl = document.getElementById('resTaxReturnReason');
+      
+      if (result.needsTaxReturn) {
+        taxReturnEl.innerText = '必要 ⚠️';
+        taxReturnEl.className = 'text-2xl font-black text-red-600 dark:text-red-400';
+        taxReturnReasonEl.innerText = `副業所得が ${formatCurrency(result.sideIncome)}（20万円以上）のため`;
+      } else {
+        taxReturnEl.innerText = '不要 ⭕️';
+        taxReturnEl.className = 'text-2xl font-black text-blue-600 dark:text-blue-400';
+        taxReturnReasonEl.innerText = `副業所得が ${formatCurrency(result.sideIncome)}（20万円未満）のため`;
+      }
+    }
 
-function saveToLocal() {
-  localStorage.setItem('salary', getNum('salary'));
-  localStorage.setItem('sideRevenue', getNum('sideRevenue'));
-  localStorage.setItem('sideExpense', getNum('sideExpense'));
-  localStorage.setItem('hasDependent', document.getElementById('hasDependent').value);
-  localStorage.setItem('jobType', getNum('jobType'));
-  localStorage.setItem('workHours', getNum('workHours'));
-  localStorage.setItem('targetTakeHome', getNum('targetTakeHome'));
-}
+    // ② 副業タイプ別シミュレーター実行
+    function runTypeSimulation() {
+      const hourlyWage = Number(document.getElementById('jobType').value) || 0;
+      const weeklyHours = Math.max(0, Number(document.getElementById('workHours').value) || 0);
+      const monthlyHours = weeklyHours * 4.3;
+      const monthlyIncome = monthlyHours * hourlyWage;
+      const yearlyRevenue = monthlyIncome * 12;
 
-function loadFromLocalOrUrl() {
-  const params = new URLSearchParams(window.location.search);
-  const setVal = (id, key, def) => {
-    const val = params.get(key) ?? localStorage.getItem(key) ?? def;
-    if(val !== null) document.getElementById(id).value = val;
-  };
-  setVal('salary', 'salary', '400');
-  setVal('sideRevenue', 'sideRevenue', '50');
-  setVal('sideExpense', 'sideExpense', '10');
-  setVal('hasDependent', 'hasDependent', 'false');
-  setVal('jobType', 'jobType', '1500');
-  setVal('workHours', 'workHours', '10');
-  setVal('targetTakeHome', 'targetTakeHome', '10');
-}
+      document.getElementById('typeMonthlyIncome').innerText = formatCurrency(monthlyIncome);
 
-function updateShareUrl() {
-  // ローカル環境(file://, localhost, 127.0.0.1)で開いている場合は本番URLをベースにする
-  let baseUrl = window.location.href;
-  if (baseUrl.startsWith('file://') || baseUrl.includes('localhost') || baseUrl.includes('127.0.0.1')) {
-    baseUrl = 'https://taxsim.applab-k0314.workers.dev/';
-  } else {
-    // URLパラメータを一旦クリアしたベースURLを取得
-    baseUrl = window.location.origin + window.location.pathname;
-  }
-  
-  const url = new URL(baseUrl);
-  url.searchParams.set('salary', getNum('salary'));
-  url.searchParams.set('sideRevenue', getNum('sideRevenue'));
-  url.searchParams.set('sideExpense', getNum('sideExpense'));
-  url.searchParams.set('hasDependent', document.getElementById('hasDependent').value);
-  url.searchParams.set('jobType', getNum('jobType'));
-  url.searchParams.set('workHours', getNum('workHours'));
-  url.searchParams.set('targetTakeHome', getNum('targetTakeHome'));
-  
-  // file:// 環境では replaceState がエラーになることがあるため回避
-  if (!window.location.href.startsWith('file://')) {
-    window.history.replaceState(null, '', url.href);
-  }
-  
-  const text = encodeURIComponent('副業の手取り・税金・確定申告が3秒でわかる無料シミュレーター\n');
-  const shareUrl = encodeURIComponent(url.href);
-  
-  // X (Twitter) のシェアリンク
-  document.getElementById('shareX').href = `https://x.com/intent/tweet?text=${text}&url=${shareUrl}`;
-  
-  // LINE のシェアリンク（スマホとPCで最適な画面に自動分岐）
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  if (isMobile) {
-    // スマホ：LINEアプリが起動し、テキストメッセージとしてURLを送信する
-    document.getElementById('shareLine').href = `https://line.me/R/msg/text/?${text}${shareUrl}`;
-  } else {
-    // PC：ブラウザ上でLINEのシェア画面が開き、エラーを防ぐ（※PC版はURLのみ指定可能、テキストはOGPから自動取得される）
-    document.getElementById('shareLine').href = `https://social-plugins.line.me/lineit/share?url=${shareUrl}`;
-  }
-}
+      const salary = Math.max(0, Number(document.getElementById('salary').value) || 0) * 10000;
+      const hasDependent = document.getElementById('hasDependent').value === 'true';
+      
+      const result = calculateTax(salary, yearlyRevenue, 0, hasDependent);
 
-function runAllSimulations() {
-  const s = getNum('salary'), r = getNum('sideRevenue'), e = getNum('sideExpense');
-  const d = document.getElementById('hasDependent').value === 'true';
-  
-  const res = calculateTax(s*10000, r*10000, e*10000, d);
-  document.getElementById('resSideIncome').innerText = formatCurrency(res.sideIncome);
-  document.getElementById('resTakeHome').innerText = formatCurrency(res.takeHome);
-  document.getElementById('resTotalTax').innerText = formatCurrency(res.totalTax);
-  document.getElementById('resIncomeTax').innerText = formatCurrency(res.incomeTax);
-  document.getElementById('resResidentTax').innerText = formatCurrency(res.residentTax);
-  document.getElementById('resTaxRate').innerText = `税率 ${res.appliedTaxRate}%`;
-  
-  const tr = document.getElementById('resTaxReturn'), trr = document.getElementById('resTaxReturnReason');
-  if(res.needsTaxReturn){
-    tr.innerText = '必要 ⚠️'; tr.className = 'text-2xl font-black text-red-600 dark:text-red-400';
-    trr.innerText = `副業所得が ${formatCurrency(res.sideIncome)}（20万円以上）のため`;
-  } else {
-    tr.innerText = '不要 ⭕️'; tr.className = 'text-2xl font-black text-blue-600 dark:text-blue-400';
-    trr.innerText = `副業所得が ${formatCurrency(res.sideIncome)}（20万円未満）のため`;
-  }
+      document.getElementById('typeYearlyTakeHome').innerText = formatCurrency(result.takeHome);
+      document.getElementById('typeYearlyTax').innerText = formatCurrency(result.totalTax);
+    }
 
-  const hw = getNum('jobType'), wh = getNum('workHours');
-  document.getElementById('typeMonthlyIncome').innerText = formatCurrency(wh * 4.3 * hw);
-  const resType = calculateTax(s*10000, wh * 4.3 * hw * 12, 0, d);
-  document.getElementById('typeYearlyTakeHome').innerText = formatCurrency(resType.takeHome);
-  document.getElementById('typeYearlyTax').innerText = formatCurrency(resType.totalTax);
+    // ③ 逆算ツール＆作業量シミュレーター
+    function runReverseCalc() {
+      const salary = Math.max(0, Number(document.getElementById('salary').value) || 0) * 10000;
+      const hasDependent = document.getElementById('hasDependent').value === 'true';
+      const targetTakeHome = Math.max(0, Number(document.getElementById('targetTakeHome').value) || 0) * 10000;
 
-  const th = getNum('targetTakeHome') * 10000;
-  const dummy = calculateTax(s*10000, 0, 0, d);
-  const marginalRate = (dummy.appliedTaxRate / 100) * 1.021 + 0.10;
-  let reqRev = th / (1 - marginalRate);
-  if(reqRev < 0 || !isFinite(reqRev)) reqRev = 0;
-  document.getElementById('resRequiredRevenue').innerText = formatCurrency(reqRev);
-  document.getElementById('workBlog').innerText = formatNumber(reqRev / 0.3);
-  document.getElementById('workVideo').innerText = formatNumber(reqRev / 5000);
-  document.getElementById('workWriter').innerText = formatNumber(reqRev / 3000);
-  document.getElementById('workDelivery').innerText = formatNumber(reqRev / 1500);
-}
+      const dummyResult = calculateTax(salary, 0, 0, hasDependent);
+      let marginalTaxRate = (dummyResult.appliedTaxRate / 100) * 1.021 + 0.10; 
+      
+      let requiredRevenue = targetTakeHome / (1 - marginalTaxRate);
+      if(requiredRevenue < 0 || !isFinite(requiredRevenue)) requiredRevenue = 0;
 
-let timeoutId;
-function debouncedRun() {
-  clearTimeout(timeoutId);
-  timeoutId = setTimeout(() => {
-    runAllSimulations();
-    saveToLocal();
-    updateShareUrl();
-  }, 300);
-}
+      document.getElementById('resRequiredRevenue').innerText = formatCurrency(requiredRevenue);
+      document.getElementById('workBlog').innerText = formatNumber(requiredRevenue / 0.3);
+      document.getElementById('workVideo').innerText = formatNumber(requiredRevenue / 5000);
+      document.getElementById('workWriter').innerText = formatNumber(requiredRevenue / 3000);
+      document.getElementById('workDelivery').innerText = formatNumber(requiredRevenue / 1500);
+    }
 
-function calcBareRisk() {
-  let count = 0;
-  document.querySelectorAll('.bare-check').forEach(c => { if(c.checked) count++; });
-  const el = document.getElementById('bareResult');
-  el.className = "mt-5 p-4 rounded-xl text-center font-bold border transition-colors ";
-  if(count===0){
-    el.innerHTML = "✅ 現在のところ <span class='text-xl'>安全</span> です！<br><span class='text-xs font-normal mt-1 block'>油断せず、確定申告時の「普通徴収」を忘れずに。</span>";
-    el.classList.add('bg-green-50','text-green-800','border-green-300','dark:bg-green-900/30','dark:text-green-300','dark:border-green-800');
-  } else if(count<=2){
-    el.innerHTML = "⚠️ 危険度 <span class='text-xl'>中</span><br><span class='text-xs font-normal mt-1 block'>少し隙があります。同僚へのポロリやSNSの特定に注意！</span>";
-    el.classList.add('bg-yellow-50','text-yellow-800','border-yellow-300','dark:bg-yellow-900/30','dark:text-yellow-300','dark:border-yellow-800');
-  } else {
-    el.innerHTML = "🚨 危険度 <span class='text-xl'>MAX（バレる寸前）</span><br><span class='text-xs font-normal mt-1 block'>いつ会社から呼び出されてもおかしくありません。今すぐ対策を！</span>";
-    el.classList.add('bg-red-50','text-red-800','border-red-300','dark:bg-red-900/30','dark:text-red-300','dark:border-red-800');
-  }
-}
+    // 本業年収などが変わった時に全シミュレーターを更新
+    function runAllSimulations() {
+      runSimulation();
+      runTypeSimulation();
+      runReverseCalc();
+    }
 
-const quizData =[
-  { q: "副業はいくらから確定申告が必要？", choices:["10万円以上", "20万円以上", "50万円以上"], answer: 1, explanation: "副業所得（売上 - 経費）が20万円以上になると、確定申告が必要になります。" },
-  { q: "確定申告の期間は原則いつ？", choices:["1月1日〜1月31日", "2月16日〜3月15日", "3月1日〜4月15日"], answer: 1, explanation: "原則として、翌年の2月16日から3月15日までに申告と納税を行います。" },
-  { q: "経費にできないものはどれ？", choices:["仕事用のPC代", "仕事の打ち合わせカフェ代", "プライベートの食事代"], answer: 2, explanation: "経費にできるのは「事業（副業）を行うために直接必要な支出」のみです。" },
-  { q: "会社に副業がバレにくくする住民税の納付方法は？", choices:["特別徴収", "普通徴収", "源泉徴収"], answer: 1, explanation: "「普通徴収（自分で納付）」を選ぶと、副業分の住民税通知が会社にいかなくなります。" },
-  { q: "所得税はどこに納める税金？", choices: ["国", "都道府県", "市区町村"], answer: 0, explanation: "所得税は国に納める「国税」です。一方、住民税は地方自治体に納める「地方税」です。" },
-  { q: "住民税の税率は原則何％？", choices:["5％", "10％", "20％"], answer: 1, explanation: "住民税の所得割は、原則として一律10％（都道府県民税4％＋市区町村民税6％）です。" },
-  { q: "副業の売上から経費を引いたものを何と呼ぶ？", choices: ["収入", "所得", "利益率"], answer: 1, explanation: "売上（収入）から経費を差し引いた残りの金額を「所得」と呼び、これに税金がかかります。" },
-  { q: "青色申告をするために必要な事前手続きは？", choices:["開業届と青色申告承認申請書の提出", "マイナンバーカードの作成", "専用の銀行口座の開設"], answer: 0, explanation: "青色申告の特典を受けるには、事前に税務署へ「開業届」と「青色申告承認申請書」を提出する必要があります。" },
-  { q: "フリマアプリで生活不用品を売ったお金は原則課税される？", choices:["される", "されない", "金額による"], answer: 1, explanation: "生活用動産（洋服や家具など）の譲渡による所得は原則として非課税です（貴金属など一部例外あり）。" },
-  { q: "誰でも無条件で差し引ける「基礎控除」の金額はいくら？", choices:["38万円", "48万円", "65万円"], answer: 1, explanation: "令和2年分以降、基礎控除の金額は48万円に引き上げられました。" }
-];
-let currentQuiz = 0, correctCount = 0;
+    // ④ 副業バレ危険度診断
+    function calcBareRisk() {
+      const checks = document.querySelectorAll('.bare-check');
+      let count = 0;
+      checks.forEach(c => { if(c.checked) count++; });
 
-function initQuiz() { currentQuiz = 0; correctCount = 0; showQuiz(); }
-function showQuiz() {
-  const q = quizData[currentQuiz];
-  document.getElementById('quizProgress').innerText = `${currentQuiz + 1} / ${quizData.length}`;
-  document.getElementById('quizQuestion').innerText = `Q${currentQuiz + 1}. ${q.q}`;
-  const container = document.getElementById('quizChoices'); container.innerHTML = '';
-  q.choices.forEach((choice, i) => {
-    const btn = document.createElement('button');
-    btn.className = "w-full bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 py-3 rounded-lg font-bold text-gray-700 dark:text-gray-200 hover:border-orange-400 dark:hover:border-orange-500 hover:bg-orange-50 dark:hover:bg-gray-600 transition text-left px-5";
-    btn.innerText = choice; btn.onclick = () => answerQuiz(i, btn);
-    container.appendChild(btn);
-  });
-  document.getElementById('quizResult').classList.add('hidden');
-  document.getElementById('nextQuizBtn').classList.add('hidden');
-}
+      const resultEl = document.getElementById('bareResult');
+      resultEl.className = "mt-5 p-4 rounded-xl text-center font-bold border transition-colors ";
 
-function answerQuiz(idx, btn) {
-  const q = quizData[currentQuiz], resEl = document.getElementById('quizResult');
-  Array.from(document.getElementById('quizChoices').children).forEach(b => { b.disabled = true; b.classList.add('opacity-60', 'cursor-not-allowed'); });
-  resEl.className = "mt-5 font-bold text-center p-4 rounded-lg shadow-inner transition-colors";
-  if(idx === q.answer) {
-    correctCount++;
-    btn.classList.remove('border-gray-200', 'dark:border-gray-600', 'opacity-60');
-    btn.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900/40', 'dark:border-green-500');
-    resEl.innerHTML = `🎉 <span class="text-lg">大正解！</span><br><span class="text-sm mt-2 block font-normal">${q.explanation}</span>`;
-    resEl.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-300', 'dark:bg-green-900/50', 'dark:text-green-200', 'dark:border-green-700');
-  } else {
-    btn.classList.remove('border-gray-200', 'dark:border-gray-600', 'opacity-60');
-    btn.classList.add('border-red-500', 'bg-red-50', 'dark:bg-red-900/40', 'dark:border-red-500');
-    resEl.innerHTML = `💦 <span class="text-lg">不正解...</span><br><span class="text-sm mt-2 block font-normal">正解は「${q.choices[q.answer]}」です。<br>${q.explanation}</span>`;
-    resEl.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-300', 'dark:bg-red-900/50', 'dark:text-red-200', 'dark:border-red-700');
-  }
-  const nextBtn = document.getElementById('nextQuizBtn');
-  nextBtn.classList.remove('hidden');
-  nextBtn.innerText = currentQuiz === quizData.length - 1 ? "結果を見る 🏆" : "次の問題へ ➔";
-}
+      if (count === 0) {
+        resultEl.innerHTML = "✅ 現在のところ <span class='text-xl'>安全</span> です！<br><span class='text-xs font-normal mt-1 block'>油断せず、確定申告時の「普通徴収」を忘れずに。</span>";
+        resultEl.classList.add('bg-green-50', 'text-green-800', 'border-green-300', 'dark:bg-green-900/30', 'dark:text-green-300', 'dark:border-green-800');
+      } else if (count <= 2) {
+        resultEl.innerHTML = "⚠️ 危険度 <span class='text-xl'>中</span><br><span class='text-xs font-normal mt-1 block'>少し隙があります。同僚へのポロリやSNSの特定に注意！</span>";
+        resultEl.classList.add('bg-yellow-50', 'text-yellow-800', 'border-yellow-300', 'dark:bg-yellow-900/30', 'dark:text-yellow-300', 'dark:border-yellow-800');
+      } else {
+        resultEl.innerHTML = "🚨 危険度 <span class='text-xl'>MAX（バレる寸前）</span><br><span class='text-xs font-normal mt-1 block'>いつ会社から呼び出されてもおかしくありません。今すぐ対策を！</span>";
+        resultEl.classList.add('bg-red-50', 'text-red-800', 'border-red-300', 'dark:bg-red-900/30', 'dark:text-red-300', 'dark:border-red-800');
+      }
+    }
 
-function nextQuiz() {
-  if(currentQuiz === quizData.length - 1) {
-    document.getElementById('quizProgress').innerText = "結果発表";
-    document.getElementById('quizQuestion').innerText = "お疲れ様でした！あなたの正解数は...";
-    document.getElementById('quizChoices').innerHTML = `<div class="text-center py-8"><div class="text-5xl font-black text-orange-500 dark:text-orange-400 mb-2">${correctCount} <span class="text-2xl text-gray-600 dark:text-gray-300">/ 10問</span></div><p class="text-gray-600 dark:text-gray-300 font-bold mt-4">${correctCount >= 8 ? '素晴らしい！税金マスターですね✨' : correctCount >= 5 ? 'あともう少し！基本はバッチリです👍' : '伸びしろたっぷり！解説を読んで復習しましょう📚'}</p></div>`;
-    document.getElementById('quizResult').classList.add('hidden');
-    const nextBtn = document.getElementById('nextQuizBtn');
-    nextBtn.innerText = "もう一度挑戦する 🔄";
-    nextBtn.onclick = () => { nextBtn.onclick = nextQuiz; initQuiz(); };
-  } else { currentQuiz++; showQuiz(); }
-}
+    // --- ⑦ クイズ機能 (全10問) ---
+    const quizData =[
+      { q: "副業はいくらから確定申告が必要？", choices:["10万円以上", "20万円以上", "50万円以上"], answer: 1, explanation: "副業所得（売上 - 経費）が20万円以上になると、確定申告が必要になります。" },
+      { q: "確定申告の期間は原則いつ？", choices:["1月1日〜1月31日", "2月16日〜3月15日", "3月1日〜4月15日"], answer: 1, explanation: "原則として、翌年の2月16日から3月15日までに申告と納税を行います。" },
+      { q: "経費にできないものはどれ？", choices:["仕事用のPC代", "仕事の打ち合わせカフェ代", "プライベートの食事代"], answer: 2, explanation: "経費にできるのは「事業（副業）を行うために直接必要な支出」のみです。" },
+      { q: "会社に副業がバレにくくする住民税の納付方法は？", choices:["特別徴収", "普通徴収", "源泉徴収"], answer: 1, explanation: "「普通徴収（自分で納付）」を選ぶと、副業分の住民税通知が会社にいかなくなります。" },
+      { q: "所得税はどこに納める税金？", choices:["国", "都道府県", "市区町村"], answer: 0, explanation: "所得税は国に納める「国税」です。一方、住民税は地方自治体に納める「地方税」です。" },
+      { q: "住民税の税率は原則何％？", choices:["5％", "10％", "20％"], answer: 1, explanation: "住民税の所得割は、原則として一律10％（都道府県民税4％＋市区町村民税6％）です。" },
+      { q: "副業の売上から経費を引いたものを何と呼ぶ？", choices:["収入", "所得", "利益率"], answer: 1, explanation: "売上（収入）から経費を差し引いた残りの金額を「所得」と呼び、これに税金がかかります。" },
+      { q: "青色申告をするために必要な事前手続きは？", choices:["開業届と青色申告承認申請書の提出", "マイナンバーカードの作成", "専用の銀行口座の開設"], answer: 0, explanation: "青色申告の特典を受けるには、事前に税務署へ「開業届」と「青色申告承認申請書」を提出する必要があります。" },
+      { q: "フリマアプリで生活不用品を売ったお金は原則課税される？", choices: ["される", "されない", "金額による"], answer: 1, explanation: "生活用動産（洋服や家具など）の譲渡による所得は原則として非課税です（貴金属など一部例外あり）。" },
+      { q: "誰でも無条件で差し引ける「基礎控除」の金額はいくら？", choices:["38万円", "48万円", "65万円"], answer: 1, explanation: "令和2年分以降、基礎控除の金額は48万円に引き上げられました。" }
+    ];
 
-window.onload = () => {
-  loadFromLocalOrUrl();
-  runAllSimulations();
-  updateShareUrl();
-  initQuiz();
-};
-</script>
+    let currentQuiz = 0;
+    let correctCount = 0;
+
+    function initQuiz() {
+      currentQuiz = 0;
+      correctCount = 0;
+      showQuiz();
+    }
+
+    function showQuiz() {
+      const q = quizData[currentQuiz];
+      document.getElementById('quizProgress').innerText = `${currentQuiz + 1} / ${quizData.length}`;
+      document.getElementById('quizQuestion').innerText = `Q${currentQuiz + 1}. ${q.q}`;
+      
+      const choicesContainer = document.getElementById('quizChoices');
+      choicesContainer.innerHTML = '';
+      
+      q.choices.forEach((choice, index) => {
+        const btn = document.createElement('button');
+        btn.className = "w-full bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 py-3 rounded-lg font-bold text-gray-700 dark:text-gray-200 hover:border-orange-400 dark:hover:border-orange-500 hover:bg-orange-50 dark:hover:bg-gray-600 transition text-left px-5";
+        btn.innerText = choice;
+        btn.onclick = () => answerQuiz(index, btn);
+        choicesContainer.appendChild(btn);
+      });
+      
+      document.getElementById('quizResult').classList.add('hidden');
+      document.getElementById('nextQuizBtn').classList.add('hidden');
+    }
+
+    function answerQuiz(selectedIndex, btnElement) {
+      const q = quizData[currentQuiz];
+      const resultEl = document.getElementById('quizResult');
+      const choicesContainer = document.getElementById('quizChoices');
+      
+      Array.from(choicesContainer.children).forEach(btn => {
+        btn.disabled = true;
+        btn.classList.add('opacity-60', 'cursor-not-allowed');
+      });
+      
+      resultEl.className = "mt-5 font-bold text-center p-4 rounded-lg shadow-inner transition-colors";
+      
+      if (selectedIndex === q.answer) {
+        correctCount++;
+        btnElement.classList.remove('border-gray-200', 'dark:border-gray-600', 'opacity-60');
+        btnElement.classList.add('border-green-500', 'bg-green-50', 'dark:bg-green-900/40', 'dark:border-green-500');
+        resultEl.innerHTML = `🎉 <span class="text-lg">大正解！</span><br><span class="text-sm mt-2 block font-normal">${q.explanation}</span>`;
+        resultEl.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-300', 'dark:bg-green-900/50', 'dark:text-green-200', 'dark:border-green-700');
+      } else {
+        btnElement.classList.remove('border-gray-200', 'dark:border-gray-600', 'opacity-60');
+        btnElement.classList.add('border-red-500', 'bg-red-50', 'dark:bg-red-900/40', 'dark:border-red-500');
+        resultEl.innerHTML = `💦 <span class="text-lg">不正解...</span><br><span class="text-sm mt-2 block font-normal">正解は「${q.choices[q.answer]}」です。<br>${q.explanation}</span>`;
+        resultEl.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-300', 'dark:bg-red-900/50', 'dark:text-red-200', 'dark:border-red-700');
+      }
+      
+      document.getElementById('nextQuizBtn').classList.remove('hidden');
+      
+      if (currentQuiz === quizData.length - 1) {
+        document.getElementById('nextQuizBtn').innerText = "結果を見る 🏆";
+      } else {
+        document.getElementById('nextQuizBtn').innerText = "次の問題へ ➔";
+      }
+    }
+
+    function nextQuiz() {
+      if (currentQuiz === quizData.length - 1) {
+        document.getElementById('quizProgress').innerText = "結果発表";
+        document.getElementById('quizQuestion').innerText = "お疲れ様でした！あなたの正解数は...";
+        document.getElementById('quizChoices').innerHTML = `
+          <div class="text-center py-8">
+            <div class="text-5xl font-black text-orange-500 dark:text-orange-400 mb-2">${correctCount} <span class="text-2xl text-gray-600 dark:text-gray-300">/ 10問</span></div>
+            <p class="text-gray-600 dark:text-gray-300 font-bold mt-4">${correctCount >= 8 ? '素晴らしい！税金マスターですね✨' : correctCount >= 5 ? 'あともう少し！基本はバッチリです👍' : '伸びしろたっぷり！解説を読んで復習しましょう📚'}</p>
+          </div>
+        `;
+        document.getElementById('quizResult').classList.add('hidden');
+        
+        const nextBtn = document.getElementById('nextQuizBtn');
+        nextBtn.innerText = "もう一度挑戦する 🔄";
+        nextBtn.onclick = () => {
+          nextBtn.onclick = nextQuiz; 
+          initQuiz();
+        };
+      } else {
+        currentQuiz++;
+        showQuiz();
+      }
+    }
+
+    // 初期化
+    window.onload = () => {
+      runAllSimulations();
+      initQuiz();
+    };
+  </script>
 </body>
 </html>
