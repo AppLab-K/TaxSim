@@ -504,10 +504,13 @@ function loadFromLocalOrUrl() {
 }
 
 function updateShareUrl() {
-  // ローカル環境(file://)で開いている場合は本番URLをベースにする
+  // ローカル環境(file://, localhost, 127.0.0.1)で開いている場合は本番URLをベースにする
   let baseUrl = window.location.href;
-  if (baseUrl.startsWith('file://')) {
+  if (baseUrl.startsWith('file://') || baseUrl.includes('localhost') || baseUrl.includes('127.0.0.1')) {
     baseUrl = 'https://taxsim.applab-k0314.workers.dev/';
+  } else {
+    // URLパラメータを一旦クリアしたベースURLを取得
+    baseUrl = window.location.origin + window.location.pathname;
   }
   
   const url = new URL(baseUrl);
@@ -524,7 +527,7 @@ function updateShareUrl() {
     window.history.replaceState(null, '', url.href);
   }
   
-  const text = encodeURIComponent('副業の手取り・税金・確定申告が3秒でわかる無料シミュレーター');
+  const text = encodeURIComponent('副業の手取り・税金・確定申告が3秒でわかる無料シミュレーター\n');
   const shareUrl = encodeURIComponent(url.href);
   
   // X (Twitter) のシェアリンク
@@ -533,10 +536,10 @@ function updateShareUrl() {
   // LINE のシェアリンク（スマホとPCで最適な画面に自動分岐）
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if (isMobile) {
-    // スマホ：LINEアプリが起動し、必ず「送信先を選択する画面」が開く
-    document.getElementById('shareLine').href = `https://line.me/R/share?text=${text}%0D%0A${shareUrl}`;
+    // スマホ：LINEアプリが起動し、テキストメッセージとしてURLを送信する
+    document.getElementById('shareLine').href = `https://line.me/R/msg/text/?${text}${shareUrl}`;
   } else {
-    // PC：ブラウザ上でLINEのシェア画面が開き、エラーを防ぐ
+    // PC：ブラウザ上でLINEのシェア画面が開き、エラーを防ぐ（※PC版はURLのみ指定可能、テキストはOGPから自動取得される）
     document.getElementById('shareLine').href = `https://social-plugins.line.me/lineit/share?url=${shareUrl}`;
   }
 }
